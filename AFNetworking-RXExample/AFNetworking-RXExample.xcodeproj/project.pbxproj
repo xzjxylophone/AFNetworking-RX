@@ -14,7 +14,7 @@
 		C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E071CE1C92400BF6E1F /* MainViewController.m */; };
 		C9F53E0A1CE1C92400BF6E1F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F53E081CE1C92400BF6E1F /* MainViewController.xib */; };
 		C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */; };
-		C9F53E161CE1CAA400BF6E1F /* RXRequestConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */; };
+		C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */; };
 		C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1B1CE1D97E00BF6E1F /* RTExhibitionListRequest.m */; };
 		C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */; };
 		C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E261CE1E78B00BF6E1F /* RTBaseCityRequest.m */; };
@@ -36,8 +36,8 @@
 		C9F53E081CE1C92400BF6E1F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseRequest.h; sourceTree = "<group>"; };
 		C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseRequest.m; sourceTree = "<group>"; };
-		C9F53E141CE1CAA400BF6E1F /* RXRequestConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXRequestConfigManager.h; sourceTree = "<group>"; };
-		C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXRequestConfigManager.m; sourceTree = "<group>"; };
+		C9F53E141CE1CAA400BF6E1F /* RXNetworkingConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingConfigManager.h; sourceTree = "<group>"; };
+		C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingConfigManager.m; sourceTree = "<group>"; };
 		C9F53E171CE1CB7600BF6E1F /* AFNetworking-RXHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXHeader.h"; sourceTree = "<group>"; };
 		C9F53E181CE1CCBE00BF6E1F /* AFNetworking-RXExample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXExample-Prefix.pch"; sourceTree = "<group>"; };
 		C9F53E1A1CE1D97E00BF6E1F /* RTExhibitionListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTExhibitionListRequest.h; sourceTree = "<group>"; };
@@ -139,8 +139,8 @@
 		C9F53E0F1CE1CA7800BF6E1F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C9F53E141CE1CAA400BF6E1F /* RXRequestConfigManager.h */,
-				C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */,
+				C9F53E141CE1CAA400BF6E1F /* RXNetworkingConfigManager.h */,
+				C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -293,7 +293,7 @@
 				C9F53E2A1CE1E9BF00BF6E1F /* RXLoginRequest.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,
-				C9F53E161CE1CAA400BF6E1F /* RXRequestConfigManager.m in Sources */,
+				C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */,
 				C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */,
 				C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */,
 			);

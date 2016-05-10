@@ -33,7 +33,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
 #warning Config request
-    [RXRequestConfigManager sharedInstance].baseUrlString = @"http://api.hiexhibition.com";
+    RXNetworkingConfigManager *cm = [RXNetworkingConfigManager sharedInstance];
+    cm.baseUrlString = @"http://api.hiexhibition.com";
+    cm.timeoutInterval = 10;
     
     [self showMain];
     [self.window makeKeyAndVisible];

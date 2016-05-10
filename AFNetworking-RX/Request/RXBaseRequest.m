@@ -7,7 +7,7 @@
 //
 
 #import "RXBaseRequest.h"
-#import "RXRequestConfigManager.h"
+#import "RXNetworkingConfigManager.h"
 #import "RXAFNetworkingGlobal.h"
 
 
@@ -38,7 +38,7 @@
 }
 - (NSString *)baseUrlString
 {
-    return [RXRequestConfigManager sharedInstance].baseUrlString;
+    return [RXNetworkingConfigManager sharedInstance].baseUrlString;
 }
 - (NSString *)requestUrlString
 {
@@ -52,6 +52,10 @@
 {
     return [NSDictionary dictionary];
 }
+- (NSTimeInterval)timeoutInterval
+{
+    return [RXNetworkingConfigManager sharedInstance].timeoutInterval;
+}
 
 #pragma mark - Public
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion
@@ -64,20 +68,30 @@
 {
     // 这里必须要用__strong
     __strong __typeof(self) strongSelf = self;
+    
+    
+    AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+    [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
+        return [strongSelf __private_parametersFromDictionary:parameters];
+    }];
+    requestSerializer.timeoutInterval = self.timeoutInterval;
+    self.httpSessionManager.requestSerializer = requestSerializer;
+    
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
-            
+            [self.httpSessionManager GET:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
+                // Do Noting
+            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];
+            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error];
+            }];
         }
             break;
         case kE_RXRequestMethod_Post:
         default:
         {
-            AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
-            [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
-                return [strongSelf __private_parametersFromDictionary:parameters];
-            }];
-            self.httpSessionManager.requestSerializer = requestSerializer;
             [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {
                 [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];

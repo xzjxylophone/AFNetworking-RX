@@ -14,7 +14,7 @@
 
 
 // manager
-#import "RXRequestConfigManager.h"
+#import "RXNetworkingConfigManager.h"
 
 
 // request

@@ -9,5 +9,6 @@
 #import "RXBaseRequest.h"
 
 @interface RTExhibitionListRequest : RXBaseRequest
+- (id)initWithOffset:(NSInteger)offset num:(NSInteger)num;
 
 @end

@@ -37,9 +37,9 @@
 - (void)testOneRequest
 {
     __weak __typeof(self) weakSelf = self;
-    RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] init];
+    RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
     [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
+        NSLog(@"responseObject:%@", responseObject);
         [weakSelf addViewToView];
     }];
 }
@@ -50,7 +50,7 @@
     __weak __typeof(self) weakSelf = self;
     RTBaseCityRequest *request = [[RTBaseCityRequest alloc] init];
     [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
+        NSLog(@"responseObject:%@", responseObject);
         [weakSelf addViewToView];
         weakSelf.rtBaseCityRequest = nil;
     }];
@@ -68,7 +68,6 @@
     __weak __typeof(self) weakSelf = self;
     RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
     [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
         NSLog(@"responseObject:%@", responseObject);
         [weakSelf addViewToView];
     }];
@@ -81,7 +80,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self performSelector:@selector(testOneRequest2) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testOneRequest) withObject:nil afterDelay:1];
 }
 
 - (void)didReceiveMemoryWarning {

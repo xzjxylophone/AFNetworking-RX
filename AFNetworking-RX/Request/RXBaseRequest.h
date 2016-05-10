@@ -37,7 +37,9 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, id responseObjec
 #pragma mark - Need To Override
 // default 0
 @property (nonatomic, readonly) NSInteger tag;
-// default RXRequestConfigManager baseUrlString
+// default RXNetworkingConfigManager timeoutInterval
+@property (nonatomic, readonly) NSTimeInterval timeoutInterval;
+// default RXNetworkingConfigManager baseUrlString
 @property (nonatomic, readonly) NSString *baseUrlString;
 // default @""
 @property (nonatomic, readonly) NSString *requestUrlString;
