@@ -13,6 +13,8 @@
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
 		C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E071CE1C92400BF6E1F /* MainViewController.m */; };
 		C9F53E0A1CE1C92400BF6E1F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F53E081CE1C92400BF6E1F /* MainViewController.xib */; };
+		C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */; };
+		C9F53E161CE1CAA400BF6E1F /* RXRequestConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,10 @@
 		C9F53E061CE1C92400BF6E1F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C9F53E071CE1C92400BF6E1F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C9F53E081CE1C92400BF6E1F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseRequest.h; sourceTree = "<group>"; };
+		C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseRequest.m; sourceTree = "<group>"; };
+		C9F53E141CE1CAA400BF6E1F /* RXRequestConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXRequestConfigManager.h; sourceTree = "<group>"; };
+		C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXRequestConfigManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,7 @@
 		C9F53DE31CE1C7F100BF6E1F = {
 			isa = PBXGroup;
 			children = (
+				C9F53E0B1CE1CA0400BF6E1F /* AFNetworking-RX */,
 				C9F53DEE1CE1C7F100BF6E1F /* AFNetworking-RXExample */,
 				C9F53DED1CE1C7F100BF6E1F /* Products */,
 				726EB246559935089409D1EC /* Pods */,
@@ -98,6 +105,34 @@
 				C9F53DF01CE1C7F100BF6E1F /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9F53E0B1CE1CA0400BF6E1F /* AFNetworking-RX */ = {
+			isa = PBXGroup;
+			children = (
+				C9F53E0F1CE1CA7800BF6E1F /* Manager */,
+				C9F53E101CE1CA7800BF6E1F /* Request */,
+			);
+			name = "AFNetworking-RX";
+			path = "../AFNetworking-RX";
+			sourceTree = "<group>";
+		};
+		C9F53E0F1CE1CA7800BF6E1F /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				C9F53E141CE1CAA400BF6E1F /* RXRequestConfigManager.h */,
+				C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		C9F53E101CE1CA7800BF6E1F /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */,
+				C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +255,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,
+				C9F53E161CE1CAA400BF6E1F /* RXRequestConfigManager.m in Sources */,
 				C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
