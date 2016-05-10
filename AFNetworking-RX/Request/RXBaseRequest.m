@@ -48,7 +48,10 @@
 {
     return kE_RXRequestMethod_Post;
 }
-
+- (NSDictionary *)requestParameters
+{
+    return [NSDictionary dictionary];
+}
 
 #pragma mark - Public
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion
@@ -70,7 +73,12 @@
         case kE_RXRequestMethod_Post:
         default:
         {
-            [self.httpSessionManager POST:self.requestUrlString parameters:nil progress:^(NSProgress * progress) {
+            AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+            [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
+                return [strongSelf __private_parametersFromDictionary:parameters];
+            }];
+            self.httpSessionManager.requestSerializer = requestSerializer;
+            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {
                 [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
@@ -80,6 +88,19 @@
             break;
     }
 }
+
+#pragma mark - Private
+- (NSString *)__private_parametersFromDictionary:(NSDictionary *)dic
+{
+    NSMutableArray *ary = [NSMutableArray array];
+    for (NSString *key in dic.allKeys) {
+        NSString *value = [dic objectForKey:key];
+        [ary addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
+    }
+    NSString *result = [ary componentsJoinedByString:@"&"];
+    return result;
+}
+
 
 
 #pragma mark - Safe Block

@@ -8,7 +8,9 @@
 
 #import "MainViewController.h"
 #import "RTExhibitionListRequest.h"
+#import "RTBaseCityRequest.h"
 
+#import "RXLoginRequest.h"
 
 
 
@@ -18,20 +20,58 @@
 @interface MainViewController ()
 
 
+@property (nonatomic, strong) RTBaseCityRequest *rtBaseCityRequest;
+
 
 @end
 
 @implementation MainViewController
 
+- (void)addViewToView
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+}
 
 - (void)testOneRequest
 {
+    __weak __typeof(self) weakSelf = self;
     RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] init];
     [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", responseObject);
-        NSLog(@"error:%@", error);
+        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
+        [weakSelf addViewToView];
     }];
-//    [request start];
+}
+
+
+- (void)testOneRequest2
+{
+    __weak __typeof(self) weakSelf = self;
+    RTBaseCityRequest *request = [[RTBaseCityRequest alloc] init];
+    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
+        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
+        [weakSelf addViewToView];
+        weakSelf.rtBaseCityRequest = nil;
+    }];
+    self.rtBaseCityRequest = request;
+}
+
+
+
+- (void)testOneRequest3
+{
+    
+    NSString *account = @"15901031954";
+    NSString *pwd = @"123456";
+    
+    __weak __typeof(self) weakSelf = self;
+    RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
+    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
+        NSLog(@"responseObject:%@", NSStringFromClass([responseObject class]));
+        NSLog(@"responseObject:%@", responseObject);
+        [weakSelf addViewToView];
+    }];
 }
 
 
@@ -41,7 +81,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self performSelector:@selector(testOneRequest) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testOneRequest2) withObject:nil afterDelay:1];
 }
 
 - (void)didReceiveMemoryWarning {

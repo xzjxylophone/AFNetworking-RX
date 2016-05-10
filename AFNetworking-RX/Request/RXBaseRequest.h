@@ -43,6 +43,9 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, id responseObjec
 @property (nonatomic, readonly) NSString *requestUrlString;
 // default kE_RXRequestMethod_Post
 @property (nonatomic, readonly) E_RXRequestMethod e_RXRequestMethod;
+// default [NSDictionary dictionary]
+@property (nonatomic, readonly) NSDictionary *requestParameters;
+
 
 
 
