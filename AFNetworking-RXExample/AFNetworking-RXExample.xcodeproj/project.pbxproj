@@ -34,6 +34,8 @@
 		C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseRequest.m; sourceTree = "<group>"; };
 		C9F53E141CE1CAA400BF6E1F /* RXRequestConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXRequestConfigManager.h; sourceTree = "<group>"; };
 		C9F53E151CE1CAA400BF6E1F /* RXRequestConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXRequestConfigManager.m; sourceTree = "<group>"; };
+		C9F53E171CE1CB7600BF6E1F /* AFNetworking-RXHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXHeader.h"; sourceTree = "<group>"; };
+		C9F53E181CE1CCBE00BF6E1F /* AFNetworking-RXExample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXExample-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		C9F53DEF1CE1C7F100BF6E1F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C9F53E181CE1CCBE00BF6E1F /* AFNetworking-RXExample-Prefix.pch */,
 				C9F53DF01CE1C7F100BF6E1F /* main.m */,
 			);
 			name = "Supporting Files";
@@ -110,6 +113,7 @@
 		C9F53E0B1CE1CA0400BF6E1F /* AFNetworking-RX */ = {
 			isa = PBXGroup;
 			children = (
+				C9F53E171CE1CB7600BF6E1F /* AFNetworking-RXHeader.h */,
 				C9F53E0F1CE1CA7800BF6E1F /* Manager */,
 				C9F53E101CE1CA7800BF6E1F /* Request */,
 			);
@@ -356,6 +360,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = "AFNetworking-RXExample/AFNetworking-RXExample-Prefix.pch";
 				INFOPLIST_FILE = "AFNetworking-RXExample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -371,6 +376,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PREFIX_HEADER = "AFNetworking-RXExample/AFNetworking-RXExample-Prefix.pch";
 				INFOPLIST_FILE = "AFNetworking-RXExample/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

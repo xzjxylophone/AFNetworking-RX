@@ -1,0 +1,66 @@
+//
+// Prefix header for all source files of the 'Wanhui' target in the 'Wanhui' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+
+
+#import <Foundation/Foundation.h>
+
+
+
+
+
+//#import "RXAppPch.h"
+
+
+////去掉nslog
+//#ifndef __OPTIMIZE__
+//#define NSLog(__FORMAT__, ...) NSLog((@"%s [Line %d] " __FORMAT__), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+//#else
+//#define DISABLE_CORE_LOG
+//#define DISABLE_CONTROL_LOG
+//#define NSLog(__FORMAT__, ...) {}
+//#endif
+
+#pragma mark - cocoapod
+
+//#import "AFNetworking-RXHeader.h"
+
+#pragma mark - My cocoapod
+
+//#import "RXCategoryHeader.h"
+//#import "RXVCMediatorHeader.h"
+//#import "RXCTHeader.h"
+//#import "RXTextView.h"
+//#import "RXPaddingView.h"
+//#import "RXVerifyButton.h"
+//#import "RXAppDefineHeader.h"
+//#import "RXPushTokenManager.h"
+//#import "RXUserManager.h"
+//#import "RXInfoHelper.h"
+//#import "RXSDCHelper.h"
+//#import "RXCheckView.h"
+//#import "RXActionSheetView.h"
+//#import "RXGuideManagerHeader.h"
+//#import "RXTableViewItemHeader.h"
+
+#pragma mark - App
+#import "AppDelegate.h"
+
+
+
+
+
+
+
+#endif
+
+

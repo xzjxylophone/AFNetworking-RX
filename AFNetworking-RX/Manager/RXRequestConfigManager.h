@@ -10,4 +10,15 @@
 
 @interface RXRequestConfigManager : NSObject
 
+
+@property (nonatomic, copy) NSString *baseUrlString;
+
+
+
+
+
+
+
+
++ (RXRequestConfigManager *)sharedInstance;
 @end
