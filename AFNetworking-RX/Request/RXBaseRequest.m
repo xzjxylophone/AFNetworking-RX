@@ -59,7 +59,7 @@
 
 - (void)start
 {
-    // 这里必须要用__strong, 也许将来是有问题的...
+    // 这里必须要用__strong
     __strong __typeof(self) strongSelf = self;
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:

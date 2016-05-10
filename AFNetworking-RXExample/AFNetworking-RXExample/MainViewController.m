@@ -9,7 +9,15 @@
 #import "MainViewController.h"
 #import "RTExhibitionListRequest.h"
 
+
+
+
+
+
+
 @interface MainViewController ()
+
+
 
 @end
 
@@ -19,16 +27,16 @@
 - (void)testOneRequest
 {
     RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] init];
-//    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-//        NSLog(@"responseObject:%@", responseObject);
-//        NSLog(@"error:%@", error);
-//    }];
-    [request start];
+    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
+        NSLog(@"responseObject:%@", responseObject);
+        NSLog(@"error:%@", error);
+    }];
+//    [request start];
 }
 
 
 
-#pragma mark - Constructor And Destructor
+#pragma mark - View Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
