@@ -114,6 +114,17 @@
         } else {
             self.resultCode = [code integerValue];
             self.resultMsg = (NSString *)msg;
+            
+            
+            if (cm.customServerResultAction != nil) {
+                cm.customServerResultAction(self.resultCode);
+            }
+            
+            
+            
+            
+            
+            
         }
     }
     return self;

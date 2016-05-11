@@ -37,10 +37,11 @@
         
         self.serverInvalidFormatMsg = @"服务端返回的格式错误,主要是code/msg";
         self.serverInvalidFormatCode = kE_RX_NetworkExceptionType_ServerInvalidFormat;
+        
+        self.customServerResultAction = nil;
     }
     return self;
 }
-
 
 
 

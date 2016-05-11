@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, E_RXRequestMethod) {
 
 
 
-typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, RXBaseResponse *response);
+typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 
 
 @interface RXBaseRequest : NSObject
@@ -48,6 +48,9 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, RXBaseResponse *
 @property (nonatomic, readonly) E_RXRequestMethod e_RXRequestMethod;
 // default [NSDictionary dictionary]
 @property (nonatomic, readonly) NSDictionary *requestParameters;
+
+
+@property (nonatomic, strong) RXBaseResponse *response;
 
 
 

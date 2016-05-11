@@ -39,7 +39,7 @@
 {
     __weak __typeof(self) weakSelf = self;
     RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
-    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
+    [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
     }];
 }
@@ -49,7 +49,7 @@
 {
     __weak __typeof(self) weakSelf = self;
     RTBaseCityRequest *request = [[RTBaseCityRequest alloc] init];
-    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
+    [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
         weakSelf.rtBaseCityRequest = nil;
     }];
@@ -64,7 +64,7 @@
     NSString *pwd = @"123456";
     __weak __typeof(self) weakSelf = self;
     RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
-    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
+    [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
     }];
 }

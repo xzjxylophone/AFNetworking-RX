@@ -36,6 +36,11 @@
     RXNetworkingConfigManager *cm = [RXNetworkingConfigManager sharedInstance];
     cm.baseUrlString = @"http://api.hiexhibition.com";
     cm.timeoutInterval = 20;
+    cm.resultCodeKey = @"status";
+    cm.resultMsgKey = @"msg";
+    cm.customServerResultAction = ^(NSInteger code) {
+        NSLog(@"customServerResultAction code:%zd", code);
+    };
     
     [self showMain];
     [self.window makeKeyAndVisible];

@@ -82,9 +82,9 @@
         {
             [self.httpSessionManager GET:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
-            } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            } success:^(NSURLSessionDataTask *task, id responseObject) {
                 [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];
-            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error];
             }];
         }
@@ -121,14 +121,34 @@
 - (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error
 {
     if (self.completion != nil) {
+        // 全部放在主线程
         RXBaseResponse *response = nil;
         if (error != nil) {
             response = [RXBaseResponse networkErrorResponseWithError:error];
         } else {
             response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
         }
-        self.completion(request, response);
+        self.response = response;
+        self.completion(request);
         self.completion = nil;
+        
+        // 使用多线程解析
+//        __weak typeof(self) weakSelf = self;
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            RXBaseResponse *response = nil;
+//            if (error != nil) {
+//                response = [RXBaseResponse networkErrorResponseWithError:error];
+//            } else {
+//                response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
+//            }
+//            weakSelf.response = response;
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                weakSelf.completion(request);
+//                weakSelf.completion = nil;
+//            });
+//        });
+        
+        
     }
 }
 

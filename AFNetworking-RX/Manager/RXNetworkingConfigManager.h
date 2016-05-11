@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
     
     kE_RX_NetworkExceptionType_ServerInvalidJSON    =           400500,
     kE_RX_NetworkExceptionType_ServerNoData         =           400501,
-    kE_RX_NetworkExceptionType_ServerInvalidFormat    =           400502,
+    kE_RX_NetworkExceptionType_ServerInvalidFormat  =           400502,
     
 };
 
@@ -60,6 +60,8 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 @property (nonatomic, assign) NSInteger serverInvalidFormatCode;
 
 
+// 执行无效的用户token的时候的操作
+@property (nonatomic, copy) void (^customServerResultAction)(NSInteger);
 
 
 
