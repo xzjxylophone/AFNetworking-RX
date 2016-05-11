@@ -12,21 +12,34 @@
 
 
 
-- (NSTimeInterval)timeoutInterval
+
+
+- (id)init
 {
-    if (_timeoutInterval == 0) {
-        _timeoutInterval = 45;
+    if (self = [super init]) {
+        self.timeoutInterval = 45;
+        self.resultMsgKey = @"msg";
+        self.resultCodeKey = @"code";
+        self.successResultCode = 0;
+        
+        
+        self.networkErrorMsg = @"网络错误";
+        self.networkErrorCode = kE_RX_NetworkExceptionType_NetworkError;
+        
+        self.networkTimeoutMsg = @"网络超时";
+        self.networkTimeoutCode = kE_RX_NetworkExceptionType_NetworkTimeout;
+        
+        self.serverInvalidJSONMsg = @"服务端返回不是一个有效的JSON格式";
+        self.serverInvalidJSONCode = kE_RX_NetworkExceptionType_ServerInvalidJSON;
+        
+        self.serverNoDataMsg = @"服务端返回空数据";
+        self.serverNoDataCode = kE_RX_NetworkExceptionType_ServerNoData;
+        
+        self.serverInvalidFormatMsg = @"服务端返回的格式错误,主要是code/msg";
+        self.serverInvalidFormatCode = kE_RX_NetworkExceptionType_ServerInvalidFormat;
     }
-    return _timeoutInterval;
+    return self;
 }
-
-
-
-
-
-
-
-
 
 
 

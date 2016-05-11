@@ -9,7 +9,7 @@
 #import "RXBaseRequest.h"
 #import "RXNetworkingConfigManager.h"
 #import "RXAFNetworkingGlobal.h"
-
+#import "RXBaseResponse.h"
 
 
 @interface RXBaseRequest ()
@@ -121,7 +121,13 @@
 - (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error
 {
     if (self.completion != nil) {
-        self.completion(request, responseObject, error);
+        RXBaseResponse *response = nil;
+        if (error != nil) {
+            response = [RXBaseResponse networkErrorResponseWithError:error];
+        } else {
+            response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
+        }
+        self.completion(request, response);
         self.completion = nil;
     }
 }

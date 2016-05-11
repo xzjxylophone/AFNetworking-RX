@@ -11,6 +11,7 @@
 
 
 
+@class RXBaseResponse;
 @class RXBaseRequest;
 
 typedef NS_ENUM(NSInteger, E_RXRequestMethod) {
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSInteger, E_RXRequestMethod) {
 
 
 
-typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, id responseObject, NSError *error);
+typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request, RXBaseResponse *response);
 
 
 @interface RXBaseRequest : NSObject

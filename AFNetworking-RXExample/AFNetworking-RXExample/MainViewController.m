@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "AFNetworking-RXHeader.h"
 #import "RTExhibitionListRequest.h"
 #import "RTBaseCityRequest.h"
 
@@ -38,8 +39,7 @@
 {
     __weak __typeof(self) weakSelf = self;
     RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
-    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", responseObject);
+    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
         [weakSelf addViewToView];
     }];
 }
@@ -49,8 +49,7 @@
 {
     __weak __typeof(self) weakSelf = self;
     RTBaseCityRequest *request = [[RTBaseCityRequest alloc] init];
-    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", responseObject);
+    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
         [weakSelf addViewToView];
         weakSelf.rtBaseCityRequest = nil;
     }];
@@ -63,11 +62,9 @@
 {
     NSString *account = @"15901031954";
     NSString *pwd = @"123456";
-    
     __weak __typeof(self) weakSelf = self;
     RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
-    [request startWithCompletion:^(RXBaseRequest *request, id responseObject, NSError *error) {
-        NSLog(@"responseObject:%@", responseObject);
+    [request startWithCompletion:^(RXBaseRequest *request, RXBaseResponse *response) {
         [weakSelf addViewToView];
     }];
 }
