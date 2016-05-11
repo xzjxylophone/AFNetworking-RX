@@ -35,7 +35,7 @@
 #warning Config request
     RXNetworkingConfigManager *cm = [RXNetworkingConfigManager sharedInstance];
     cm.baseUrlString = @"http://api.hiexhibition.com";
-    cm.timeoutInterval = 10;
+    cm.timeoutInterval = 20;
     
     [self showMain];
     [self.window makeKeyAndVisible];

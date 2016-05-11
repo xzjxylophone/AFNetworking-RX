@@ -61,7 +61,6 @@
 
 - (void)testOneRequest3
 {
-    
     NSString *account = @"15901031954";
     NSString *pwd = @"123456";
     

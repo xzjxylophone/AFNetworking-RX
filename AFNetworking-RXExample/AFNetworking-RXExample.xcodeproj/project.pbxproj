@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE05E044DC55EC27A13A7AF8 /* libPods.a */; };
+		C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
 		C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */; };
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
@@ -25,6 +26,8 @@
 		37563F2A3724139D03098355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BE05E044DC55EC27A13A7AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C900E3D81CE2D8750097D6F8 /* RXBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseResponse.h; sourceTree = "<group>"; };
+		C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
 		C9F53DEC1CE1C7F100BF6E1F /* AFNetworking-RXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFNetworking-RXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F53DF01CE1C7F100BF6E1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +82,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C900E3D71CE2D82C0097D6F8 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C900E3D81CE2D8750097D6F8 /* RXBaseResponse.h */,
+				C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */,
+			);
+			path = Response;
+			sourceTree = "<group>";
+		};
 		C9F53DE31CE1C7F100BF6E1F = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +143,7 @@
 				C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */,
 				C9F53E0F1CE1CA7800BF6E1F /* Manager */,
 				C9F53E101CE1CA7800BF6E1F /* Request */,
+				C900E3D71CE2D82C0097D6F8 /* Response */,
 			);
 			name = "AFNetworking-RX";
 			path = "../AFNetworking-RX";
@@ -288,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */,
+				C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */,
 				C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */,
 				C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */,
 				C9F53E2A1CE1E9BF00BF6E1F /* RXLoginRequest.m in Sources */,
