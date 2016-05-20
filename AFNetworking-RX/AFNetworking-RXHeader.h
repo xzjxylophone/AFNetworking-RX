@@ -19,6 +19,7 @@
 
 // request
 #import "RXBaseRequest.h"
+#import "RXBatchRequestObject.h"
 
 // response
 #import "RXBaseResponse.h"

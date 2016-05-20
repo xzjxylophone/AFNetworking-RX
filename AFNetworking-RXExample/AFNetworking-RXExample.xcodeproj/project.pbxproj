@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE05E044DC55EC27A13A7AF8 /* libPods.a */; };
 		C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */; };
+		C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
 		C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */; };
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
@@ -28,6 +29,8 @@
 		BE05E044DC55EC27A13A7AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C900E3D81CE2D8750097D6F8 /* RXBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseResponse.h; sourceTree = "<group>"; };
 		C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
+		C93794771CE2F7AA0065F68C /* RXBatchRequestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBatchRequestObject.h; sourceTree = "<group>"; };
+		C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBatchRequestObject.m; sourceTree = "<group>"; };
 		C9F53DEC1CE1C7F100BF6E1F /* AFNetworking-RXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFNetworking-RXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F53DF01CE1C7F100BF6E1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 			children = (
 				C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */,
 				C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */,
+				C93794771CE2F7AA0065F68C /* RXBatchRequestObject.h */,
+				C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 				C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */,
 				C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */,
 				C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */,
+				C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */,
 				C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */,
 				C9F53E2A1CE1E9BF00BF6E1F /* RXLoginRequest.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,

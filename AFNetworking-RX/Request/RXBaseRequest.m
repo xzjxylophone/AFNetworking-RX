@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpSessionManager;
 
+
 @end
 
 
@@ -60,12 +61,18 @@
 #pragma mark - Public
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion
 {
-    self.completion = completion;
-    [self start];
+    [self startWithCompletion:completion group:NULL queue:NULL];
 }
 
 - (void)start
 {
+    [self startWithCompletion:nil group:NULL queue:NULL];
+}
+
+
+- (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
+{
+    self.completion = completion;
     // 这里必须要用__strong
     __strong __typeof(self) strongSelf = self;
     
@@ -77,15 +84,23 @@
     requestSerializer.timeoutInterval = self.timeoutInterval;
     self.httpSessionManager.requestSerializer = requestSerializer;
     
+    if (group) {
+        dispatch_group_enter(group);
+        self.httpSessionManager.completionGroup = group;
+    }
+    if (queue) {
+        self.httpSessionManager.completionQueue = queue;
+    }
+    
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
             [self.httpSessionManager GET:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
             } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];
+                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error];
+                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error group:group];
             }];
         }
             break;
@@ -94,9 +109,9 @@
         {
             [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil];
+                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error];
+                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error group:group];
             }];
         }
             break;
@@ -118,30 +133,25 @@
 
 
 #pragma mark - Safe Block
-- (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error
+- (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
 {
+    // 全部放在主线程
+    RXBaseResponse *response = nil;
+    if (error != nil) {
+        response = [RXBaseResponse networkErrorResponseWithError:error];
+    } else {
+        response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
+    }
+    self.response = response;
+    
     if (self.completion != nil) {
-        // 全部放在主线程
-        RXBaseResponse *response = nil;
-        if (error != nil) {
-            response = [RXBaseResponse networkErrorResponseWithError:error];
-        } else {
-            response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
-        }
-        self.response = response;
+        
         self.completion(request);
         self.completion = nil;
         
         // 使用多线程解析
 //        __weak typeof(self) weakSelf = self;
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            RXBaseResponse *response = nil;
-//            if (error != nil) {
-//                response = [RXBaseResponse networkErrorResponseWithError:error];
-//            } else {
-//                response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
-//            }
-//            weakSelf.response = response;
 //            dispatch_async(dispatch_get_main_queue(), ^{
 //                weakSelf.completion(request);
 //                weakSelf.completion = nil;
@@ -150,6 +160,11 @@
         
         
     }
+    if (group) {
+        dispatch_group_leave(group);
+    }
+    
+    
 }
 
 

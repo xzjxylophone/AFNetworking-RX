@@ -62,4 +62,7 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion;
 - (void)start;
 
+
+- (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
+
 @end

@@ -13,6 +13,7 @@
 
 #import "RXLoginRequest.h"
 
+#import "RXBatchRequestObject.h"
 
 
 
@@ -69,6 +70,29 @@
     }];
 }
 
+- (void)testBatchRequest01
+{
+    
+    RTBaseCityRequest *request1 = [[RTBaseCityRequest alloc] init];
+    
+    RTExhibitionListRequest *request2 = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
+    
+    RXBatchRequestObject *batch = [[RXBatchRequestObject alloc] initWithRequestArray:@[request1, request2]];
+    
+    [batch startWithCompletion:^(RXBatchRequestObject *batchRequest) {
+       
+        NSLog(@"111");
+        NSLog(@"1 response:%zd", request1.response.responseType);
+        NSLog(@"2 response:%zd", request2.response.responseType);
+        
+        
+    }];
+
+    
+    
+    
+}
+
 
 
 #pragma mark - View Life Cycle
@@ -76,7 +100,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self performSelector:@selector(testOneRequest) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];
 }
 
 - (void)didReceiveMemoryWarning {
