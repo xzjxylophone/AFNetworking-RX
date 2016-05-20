@@ -157,7 +157,7 @@
     return [RXNetworkingConfigManager sharedInstance].timeoutInterval;
 }
 
-- (void (^)(id<AFMultipartFormData> formatData))constructingBodyBlock
+- (void (^)(id<AFMultipartFormData> formData))constructingBodyBlock
 {
     return nil;
 }

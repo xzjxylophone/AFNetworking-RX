@@ -17,11 +17,16 @@
 
 
 + (id)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;
-+ (id)uploadkkkk;
++ (id)uploadWithSessionId:(NSString *)sessionId type:(NSInteger)type image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion;
 
 
+
+
+
+#pragma mark - Class Method
 + (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
-+ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters  completion:(void (^)(RXBaseResponse *response))completion;
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion;
 
 
 

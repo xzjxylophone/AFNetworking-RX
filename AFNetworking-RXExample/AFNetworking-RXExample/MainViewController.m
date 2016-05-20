@@ -100,13 +100,29 @@
 
 - (void)testUpload01
 {
-    [RXSimpleHttpManager uploadkkkk];
+    
+    NSString *sessionId = @"38cd0cadedcdcf8e3cc252106653db3b";
+    NSInteger type = 1;
+    UIImage *image = [UIImage imageNamed:@"1024"];
+    
+    [RXSimpleHttpManager uploadWithSessionId:sessionId type:type image:image constructingBodyBlock:^(id<AFMultipartFormData> formData) {
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+        // 以文件流格式上传图片
+        [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
+    } progress:^(NSProgress *progress) {
+        NSLog(@"%zd %zd", progress.completedUnitCount, progress.totalUnitCount);
+
+    } completion:^(RXBaseResponse *response) {
+        NSLog(@"response:%zd", response.responseType);
+    }];
 }
 
 - (void)testUpload02
 {
-    
-    
     NSString *sessionId = @"38cd0cadedcdcf8e3cc252106653db3b";
     NSInteger type = 1;
     UIImage *image = [UIImage imageNamed:@"1024"];

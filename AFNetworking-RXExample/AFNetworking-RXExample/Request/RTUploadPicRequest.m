@@ -32,10 +32,10 @@
 }
 
 
-- (void (^)(id<AFMultipartFormData> formatData))constructingBodyBlock
+- (void (^)(id<AFMultipartFormData> formData))constructingBodyBlock
 {
     __weak __typeof(self) weakSelf = self;
-    return ^(id<AFMultipartFormData> formatData) {
+    return ^(id<AFMultipartFormData> formData) {
         UIImage *image = weakSelf.image;
         NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -43,7 +43,7 @@
         NSString *str = [formatter stringFromDate:[NSDate date]];
         NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
         // 以文件流格式上传图片
-        [formatData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
+        [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
     };
 }
 @end
