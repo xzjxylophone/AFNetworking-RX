@@ -1,21 +1,21 @@
 //
-//  RXLoginRequest.m
+//  RTLoginRequest.m
 //  AFNetworking-RXExample
 //
 //  Created by ceshi on 16/5/10.
 //  Copyright © 2016年 Rush. All rights reserved.
 //
 
-#import "RXLoginRequest.h"
+#import "RTLoginRequest.h"
 
-@interface RXLoginRequest ()
+@interface RTLoginRequest ()
 
 @property (nonatomic, copy) NSString *account;
 @property (nonatomic, copy) NSString *pwd;
 
 @end
 
-@implementation RXLoginRequest
+@implementation RTLoginRequest
 
 - (NSString *)requestUrlString
 {

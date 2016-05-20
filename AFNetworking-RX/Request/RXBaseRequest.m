@@ -77,8 +77,7 @@
         case kE_RXRequestMethod_Post:
         default:
         {
-            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
-            } success:^(NSURLSessionDataTask *task, id responseObject) {
+            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
                 [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
                 [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
@@ -158,10 +157,10 @@
     return [RXNetworkingConfigManager sharedInstance].timeoutInterval;
 }
 
-
-
-
-
+- (void (^)(id<AFMultipartFormData> formatData))constructingBodyBlock
+{
+    return nil;
+}
 
 
 

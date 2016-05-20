@@ -12,6 +12,7 @@
 		C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */; };
 		C96B0E611CEEB02700B01976 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */; };
 		C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */; };
+		C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
 		C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */; };
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
@@ -22,7 +23,7 @@
 		C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1B1CE1D97E00BF6E1F /* RTExhibitionListRequest.m */; };
 		C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */; };
 		C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E261CE1E78B00BF6E1F /* RTBaseCityRequest.m */; };
-		C9F53E2A1CE1E9BF00BF6E1F /* RXLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E291CE1E9BF00BF6E1F /* RXLoginRequest.m */; };
+		C9F53E2A1CE1E9BF00BF6E1F /* RTLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E291CE1E9BF00BF6E1F /* RTLoginRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXSimpleHttpManager.m; sourceTree = "<group>"; };
 		C96B0E631CEEB5CE00B01976 /* RTSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSimpleHttpManager.h; sourceTree = "<group>"; };
 		C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSimpleHttpManager.m; sourceTree = "<group>"; };
+		C96B0E661CEEFB9B00B01976 /* RTUploadPicRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTUploadPicRequest.h; sourceTree = "<group>"; };
+		C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTUploadPicRequest.m; sourceTree = "<group>"; };
 		C9F53DEC1CE1C7F100BF6E1F /* AFNetworking-RXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFNetworking-RXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F53DF01CE1C7F100BF6E1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,8 +61,8 @@
 		C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAFNetworkingGlobal.m; sourceTree = "<group>"; };
 		C9F53E251CE1E78B00BF6E1F /* RTBaseCityRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTBaseCityRequest.h; sourceTree = "<group>"; };
 		C9F53E261CE1E78B00BF6E1F /* RTBaseCityRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTBaseCityRequest.m; sourceTree = "<group>"; };
-		C9F53E281CE1E9BF00BF6E1F /* RXLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXLoginRequest.h; sourceTree = "<group>"; };
-		C9F53E291CE1E9BF00BF6E1F /* RXLoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXLoginRequest.m; sourceTree = "<group>"; };
+		C9F53E281CE1E9BF00BF6E1F /* RTLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLoginRequest.h; sourceTree = "<group>"; };
+		C9F53E291CE1E9BF00BF6E1F /* RTLoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLoginRequest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,8 +200,10 @@
 				C9F53E1B1CE1D97E00BF6E1F /* RTExhibitionListRequest.m */,
 				C9F53E251CE1E78B00BF6E1F /* RTBaseCityRequest.h */,
 				C9F53E261CE1E78B00BF6E1F /* RTBaseCityRequest.m */,
-				C9F53E281CE1E9BF00BF6E1F /* RXLoginRequest.h */,
-				C9F53E291CE1E9BF00BF6E1F /* RXLoginRequest.m */,
+				C9F53E281CE1E9BF00BF6E1F /* RTLoginRequest.h */,
+				C9F53E291CE1E9BF00BF6E1F /* RTLoginRequest.m */,
+				C96B0E661CEEFB9B00B01976 /* RTUploadPicRequest.h */,
+				C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -328,8 +333,9 @@
 				C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */,
 				C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */,
 				C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */,
-				C9F53E2A1CE1E9BF00BF6E1F /* RXLoginRequest.m in Sources */,
+				C9F53E2A1CE1E9BF00BF6E1F /* RTLoginRequest.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
+				C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,
 				C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */,
 				C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */,

@@ -33,6 +33,51 @@
 }
 
 
+
+
+
++ (id)uploadkkkk
+{
+    NSDictionary *dic = @{@"SESSIONID":@"38cd0cadedcdcf8e3cc252106653db3b",
+                          @"type":@(1)};
+    NSString *url = @"v1/uploadpic";
+    
+    return [self uploadActionWithUrl:url parameters:dic];
+}
+
+
+
++ (id)uploadActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters
+{
+    RXSimpleHttpManager *http = [[self alloc] init];
+    [http.httpSessionManager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        UIImage *image = [UIImage imageNamed:@"1024"];
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyyMMddHHmmss";
+        NSString *str = [formatter stringFromDate:[NSDate date]];
+        NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
+        // 以文件流格式上传图片
+        [formData appendPartWithFileData:imageData name:@"image" fileName:fileName mimeType:@"image/jpeg"];
+    } progress:^(NSProgress *uploadProgress) {
+        NSLog(@"progeresss");
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSLog(@"success");
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"error");
+    }];
+    return http;
+}
+
+
+
+
+
+
+
+
+
+
 + (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
     RXSimpleHttpManager *http = [[self alloc] init];

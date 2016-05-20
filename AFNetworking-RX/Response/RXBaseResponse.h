@@ -11,7 +11,8 @@
 
 typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
     
-    kE_RX_ResponseType_Unknow               =           0,
+    kE_RX_ResponseType_Unknow               =           -1,
+    kE_RX_ResponseType_Success              =           0,
     kE_RX_ResponseType_NetworkError,
     kE_RX_ResponseType_NetworkTimeout,
     
@@ -19,7 +20,6 @@ typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
     kE_RX_ResponseType_ServerNoData,
     kE_RX_ResponseType_ServerInvalidFormat,
     
-    kE_RX_ResponseType_Success,
 };
 
 

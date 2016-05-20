@@ -11,11 +11,12 @@
 #import "RTExhibitionListRequest.h"
 #import "RTBaseCityRequest.h"
 
-#import "RXLoginRequest.h"
+#import "RTLoginRequest.h"
 
 #import "RXBatchRequestObject.h"
 
 #import "RTSimpleHttpManager.h"
+#import "RTUploadPicRequest.h"
 
 
 
@@ -62,7 +63,7 @@
     __weak __typeof(self) weakSelf = self;
     NSString *account = @"15901031954";
     NSString *pwd = @"123456";
-    RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
+    RTLoginRequest *request = [[RTLoginRequest alloc] initWithAccount:account pwd:pwd];
     [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
 
@@ -97,17 +98,52 @@
 }
 
 
+- (void)testUpload01
+{
+    [RXSimpleHttpManager uploadkkkk];
+}
+
+- (void)testUpload02
+{
+    
+    
+    NSString *sessionId = @"38cd0cadedcdcf8e3cc252106653db3b";
+    NSInteger type = 1;
+    UIImage *image = [UIImage imageNamed:@"1024"];
+    RTUploadPicRequest *requesut = [[RTUploadPicRequest alloc] initWithSessionId:sessionId type:type image:image];
+    requesut.uploadProgress = ^(NSProgress *progress) {
+        NSLog(@"%zd %zd", progress.completedUnitCount, progress.totalUnitCount);
+    };
+    [requesut startWithCompletion:^(RXBaseRequest *request) {
+        
+        NSLog(@"response:%zd", request.response.responseType);
+
+        
+        
+    }];
+}
+
 #pragma mark - View Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//        [self performSelector:@selector(testOneRequest1) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(testOneRequest1) withObject:nil afterDelay:1];
+    
+    
 //    [self performSelector:@selector(testOneRequest3) withObject:nil afterDelay:1];
     
     
 //    [self performSelector:@selector(testSimple01) withObject:nil afterDelay:1];
-    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
+    
+    
+//    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
+    
+    
+//    [self performSelector:@selector(testUpload01) withObject:nil afterDelay:1];
+    
+    
+    [self performSelector:@selector(testUpload02) withObject:nil afterDelay:1];
     
     
     

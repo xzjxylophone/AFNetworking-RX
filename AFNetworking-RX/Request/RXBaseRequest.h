@@ -53,8 +53,9 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 @property (nonatomic, strong) RXBaseResponse *response;
 
 
-
-
+#pragma mark - Upload
+@property (nonatomic, readonly) void (^constructingBodyBlock)(id<AFMultipartFormData> formData);
+@property (nonatomic, copy) void (^uploadProgress)(NSProgress *progress);
 
 
 #pragma mark - Public

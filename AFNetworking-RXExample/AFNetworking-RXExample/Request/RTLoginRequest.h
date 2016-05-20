@@ -1,5 +1,5 @@
 //
-//  RXLoginRequest.h
+//  RTLoginRequest.h
 //  AFNetworking-RXExample
 //
 //  Created by ceshi on 16/5/10.
@@ -8,7 +8,7 @@
 
 #import "RXBaseRequest.h"
 
-@interface RXLoginRequest : RXBaseRequest
+@interface RTLoginRequest : RXBaseRequest
 - (id)initWithAccount:(NSString *)account pwd:(NSString *)pwd;
 
 @end
