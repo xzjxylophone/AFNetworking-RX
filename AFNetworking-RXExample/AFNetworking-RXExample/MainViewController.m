@@ -63,11 +63,8 @@
 {
     NSString *account = @"15901031954";
     NSString *pwd = @"123456";
-    __weak __typeof(self) weakSelf = self;
     RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
-    [request startWithCompletion:^(RXBaseRequest *request) {
-        [weakSelf addViewToView];
-    }];
+    [request startWithCompletion:nil];
 }
 
 - (void)testBatchRequest01
@@ -100,7 +97,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self performSelector:@selector(testOneRequest3) withObject:nil afterDelay:1];
     [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

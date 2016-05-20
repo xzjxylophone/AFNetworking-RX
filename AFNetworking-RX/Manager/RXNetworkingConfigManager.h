@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class RXBaseRequest;
+@class RXBatchRequestObject;
 
 typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
     kE_RX_NetworkExceptionType_NetworkError         =           400400,
@@ -63,6 +65,18 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 // 执行无效的用户token的时候的操作
 @property (nonatomic, copy) void (^customServerResultAction)(NSInteger);
 
+
+
+
+@property (nonatomic, readonly) NSMutableArray *requestArray;
+@property (nonatomic, readonly) NSMutableArray *batchRequestArray;
+
+- (void)addRequest:(RXBaseRequest *)request;
+- (void)removeRequest:(RXBaseRequest *)request;
+
+
+- (void)addBatchRequest:(RXBatchRequestObject *)batchRequest;
+- (void)removeBatchRequest:(RXBatchRequestObject *)batchRequest;
 
 
 

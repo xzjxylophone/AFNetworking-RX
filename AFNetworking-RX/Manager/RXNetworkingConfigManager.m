@@ -7,6 +7,13 @@
 //
 
 #import "RXNetworkingConfigManager.h"
+#import "RXBaseRequest.h"
+@interface RXNetworkingConfigManager ()
+
+@property (nonatomic, strong) NSMutableArray *requestArray;
+@property (nonatomic, strong) NSMutableArray *batchRequestArray;
+
+@end
 
 @implementation RXNetworkingConfigManager
 
@@ -39,15 +46,33 @@
         self.serverInvalidFormatCode = kE_RX_NetworkExceptionType_ServerInvalidFormat;
         
         self.customServerResultAction = nil;
+        
+        self.requestArray = [NSMutableArray array];
+        self.batchRequestArray = [NSMutableArray array];
     }
     return self;
+}
+
+- (void)addRequest:(RXBaseRequest *)request
+{
+    [self.requestArray addObject:request];
+}
+- (void)removeRequest:(RXBaseRequest *)request
+{
+    [self.requestArray removeObject:request];
 }
 
 
 
 
-
-
+- (void)addBatchRequest:(RXBatchRequestObject *)batchRequest
+{
+    [self.batchRequestArray addObject:batchRequest];
+}
+- (void)removeBatchRequest:(RXBatchRequestObject *)batchRequest
+{
+    [self.batchRequestArray removeObject:batchRequest];
+}
 
 
 

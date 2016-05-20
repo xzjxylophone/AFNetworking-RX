@@ -72,14 +72,17 @@
 
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
 {
+    
+    [[RXNetworkingConfigManager sharedInstance] addRequest:self];
+    
     self.completion = completion;
-    // 这里必须要用__strong
-    __strong __typeof(self) strongSelf = self;
+    // 这里如何使用__strong 而不使用一个RequestArray 会无法释放
+    __weak __typeof(self) weakSelf = self;
     
     
     AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
     [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
-        return [strongSelf __private_parametersFromDictionary:parameters];
+        return [weakSelf __private_parametersFromDictionary:parameters];
     }];
     requestSerializer.timeoutInterval = self.timeoutInterval;
     self.httpSessionManager.requestSerializer = requestSerializer;
@@ -98,9 +101,9 @@
             [self.httpSessionManager GET:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
             } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil group:group];
+                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error group:group];
+                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
             }];
         }
             break;
@@ -109,9 +112,9 @@
         {
             [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
             } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:responseObject error:nil group:group];
+                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
-                [strongSelf safeBlock_completion:strongSelf responseObject:nil error:error group:group];
+                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
             }];
         }
             break;
@@ -145,25 +148,15 @@
     self.response = response;
     
     if (self.completion != nil) {
-        
-        self.completion(request);
+        self.completion(self);
         self.completion = nil;
-        
-        // 使用多线程解析
-//        __weak typeof(self) weakSelf = self;
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                weakSelf.completion(request);
-//                weakSelf.completion = nil;
-//            });
-//        });
-        
-        
     }
+    
     if (group) {
         dispatch_group_leave(group);
     }
-    
+    [[RXNetworkingConfigManager sharedInstance] removeRequest:self];
+
     
 }
 
@@ -173,7 +166,7 @@
 - (void)dealloc
 {
     // 可以正常释放
-    RXAFnetworkingLog(@"dealloc");
+    RXAFnetworkingLog(@"base request dealloc");
 }
 
 
