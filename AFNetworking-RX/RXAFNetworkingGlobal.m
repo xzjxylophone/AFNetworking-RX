@@ -7,8 +7,6 @@
 //
 
 #import "RXAFNetworkingGlobal.h"
-
-@implementation RXAFNetworkingGlobal
 void RXAFnetworkingLog(NSString *format, ...)
 {
 #ifdef DEBUG
@@ -18,6 +16,23 @@ void RXAFnetworkingLog(NSString *format, ...)
     va_end(argptr);
 #endif
 }
+
+
+@implementation RXAFNetworkingGlobal
+
+
+
++ (NSString *)parametersFromDictionary:(NSDictionary *)dic
+{
+    NSMutableArray *ary = [NSMutableArray array];
+    for (NSString *key in dic.allKeys) {
+        NSString *value = [dic objectForKey:key];
+        [ary addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
+    }
+    NSString *result = [ary componentsJoinedByString:@"&"];
+    return result;
+}
+
 
 
 

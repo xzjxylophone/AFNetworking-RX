@@ -15,7 +15,7 @@
 
 #import "RXBatchRequestObject.h"
 
-
+#import "RTSimpleHttpManager.h"
 
 
 
@@ -36,10 +36,10 @@
     [self.view addSubview:view];
 }
 
-- (void)testOneRequest
+- (void)testOneRequest1
 {
     __weak __typeof(self) weakSelf = self;
-    RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
+    RTExhibitionListRequest *request = [[RTExhibitionListRequest alloc] initWithOffset:0 num:1];
     [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
     }];
@@ -52,44 +52,41 @@
     RTBaseCityRequest *request = [[RTBaseCityRequest alloc] init];
     [request startWithCompletion:^(RXBaseRequest *request) {
         [weakSelf addViewToView];
-        weakSelf.rtBaseCityRequest = nil;
     }];
-    self.rtBaseCityRequest = request;
 }
 
 
 
 - (void)testOneRequest3
 {
+    __weak __typeof(self) weakSelf = self;
     NSString *account = @"15901031954";
     NSString *pwd = @"123456";
     RXLoginRequest *request = [[RXLoginRequest alloc] initWithAccount:account pwd:pwd];
-    [request startWithCompletion:nil];
+    [request startWithCompletion:^(RXBaseRequest *request) {
+        [weakSelf addViewToView];
+
+    }];
 }
 
 - (void)testBatchRequest01
 {
-    
     RTBaseCityRequest *request1 = [[RTBaseCityRequest alloc] init];
-    
     RTExhibitionListRequest *request2 = [[RTExhibitionListRequest alloc] initWithOffset:0 num:20];
-    
     RXBatchRequestObject *batch = [[RXBatchRequestObject alloc] initWithRequestArray:@[request1, request2]];
-    
     [batch startWithCompletion:^(RXBatchRequestObject *batchRequest) {
-       
         NSLog(@"111");
         NSLog(@"1 response:%zd", request1.response.responseType);
         NSLog(@"2 response:%zd", request2.response.responseType);
-        
-        
     }];
-
-    
-    
-    
 }
 
+- (void)testSimple01
+{
+    [RXSimpleHttpManager exhibitionListWithOffset:0 num:1 completion:^(RXBaseResponse *response) {
+        NSLog(@"response:%zd", response.responseType);
+    }];
+}
 
 
 #pragma mark - View Life Cycle
@@ -97,8 +94,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self performSelector:@selector(testOneRequest3) withObject:nil afterDelay:1];
-    [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];
+//        [self performSelector:@selector(testOneRequest1) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(testOneRequest3) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testSimple01) withObject:nil afterDelay:1];
+    
+    
+    
+//    [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];
     
     
 }

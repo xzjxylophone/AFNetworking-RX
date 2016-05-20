@@ -143,4 +143,16 @@
     return response;
 }
 
+
++ (id)responseWithResponseObject:(id)responseObject error:(NSError *)error
+{
+    RXBaseResponse *response = nil;
+    if (error != nil) {
+        response = [RXBaseResponse networkErrorResponseWithError:error];
+    } else {
+        response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
+    }
+    return response;
+}
+
 @end

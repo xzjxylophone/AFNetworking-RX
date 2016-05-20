@@ -23,6 +23,106 @@
 
 @implementation RXBaseRequest
 
+
+#pragma mark - Public
+- (void)startWithCompletion:(RXRequestCompletionBlock)completion
+{
+    [self startWithCompletion:completion group:NULL queue:NULL];
+}
+
+- (void)start
+{
+    [self startWithCompletion:nil group:NULL queue:NULL];
+}
+
+
+- (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
+{
+    
+    [[RXNetworkingConfigManager sharedInstance] addRequest:self];
+    
+    self.completion = completion;
+    // 这里如何使用__strong 而不使用一个RequestArray 会无法释放
+    __weak __typeof(self) weakSelf = self;
+    
+    
+    AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+    requestSerializer.timeoutInterval = self.timeoutInterval;
+    self.httpSessionManager.requestSerializer = requestSerializer;
+    
+    if (group) {
+        dispatch_group_enter(group);
+        self.httpSessionManager.completionGroup = group;
+    }
+    if (queue) {
+        self.httpSessionManager.completionQueue = queue;
+    }
+    
+    switch (self.e_RXRequestMethod) {
+        case kE_RXRequestMethod_Get:
+        {
+            [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
+                // 这里是一个字典
+                return [RXAFNetworkingGlobal parametersFromDictionary:parameters];
+            }];
+            [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
+                // Do Noting
+            } success:^(NSURLSessionDataTask *task, id responseObject) {
+                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
+            } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
+            }];
+        }
+            break;
+        case kE_RXRequestMethod_Post:
+        default:
+        {
+            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
+            } success:^(NSURLSessionDataTask *task, id responseObject) {
+                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
+            } failure:^(NSURLSessionDataTask *task, NSError * error) {
+                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
+            }];
+        }
+            break;
+    }
+}
+
+
+
+#pragma mark - Safe Block
+- (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
+{
+    // 全部放在主线程
+    self.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+    
+    if (self.completion != nil) {
+        self.completion(self);
+        self.completion = nil;
+    }
+    
+    if (group) {
+        dispatch_group_leave(group);
+    }
+    [[RXNetworkingConfigManager sharedInstance] removeRequest:self];
+
+    
+}
+
+
+
+
+- (void)dealloc
+{
+    // 可以正常释放
+    RXAFnetworkingLog(@"base request dealloc");
+}
+
+
+
+
+
+
 #pragma mark - Property
 - (AFHTTPSessionManager *)httpSessionManager
 {
@@ -57,123 +157,6 @@
 {
     return [RXNetworkingConfigManager sharedInstance].timeoutInterval;
 }
-
-#pragma mark - Public
-- (void)startWithCompletion:(RXRequestCompletionBlock)completion
-{
-    [self startWithCompletion:completion group:NULL queue:NULL];
-}
-
-- (void)start
-{
-    [self startWithCompletion:nil group:NULL queue:NULL];
-}
-
-
-- (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
-{
-    
-    [[RXNetworkingConfigManager sharedInstance] addRequest:self];
-    
-    self.completion = completion;
-    // 这里如何使用__strong 而不使用一个RequestArray 会无法释放
-    __weak __typeof(self) weakSelf = self;
-    
-    
-    AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
-    [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
-        return [weakSelf __private_parametersFromDictionary:parameters];
-    }];
-    requestSerializer.timeoutInterval = self.timeoutInterval;
-    self.httpSessionManager.requestSerializer = requestSerializer;
-    
-    if (group) {
-        dispatch_group_enter(group);
-        self.httpSessionManager.completionGroup = group;
-    }
-    if (queue) {
-        self.httpSessionManager.completionQueue = queue;
-    }
-    
-    switch (self.e_RXRequestMethod) {
-        case kE_RXRequestMethod_Get:
-        {
-            [self.httpSessionManager GET:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
-                // Do Noting
-            } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
-            } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
-            }];
-        }
-            break;
-        case kE_RXRequestMethod_Post:
-        default:
-        {
-            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters progress:^(NSProgress * progress) {
-            } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
-            } failure:^(NSURLSessionDataTask *task, NSError * error) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
-            }];
-        }
-            break;
-    }
-}
-
-#pragma mark - Private
-- (NSString *)__private_parametersFromDictionary:(NSDictionary *)dic
-{
-    NSMutableArray *ary = [NSMutableArray array];
-    for (NSString *key in dic.allKeys) {
-        NSString *value = [dic objectForKey:key];
-        [ary addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
-    }
-    NSString *result = [ary componentsJoinedByString:@"&"];
-    return result;
-}
-
-
-
-#pragma mark - Safe Block
-- (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
-{
-    // 全部放在主线程
-    RXBaseResponse *response = nil;
-    if (error != nil) {
-        response = [RXBaseResponse networkErrorResponseWithError:error];
-    } else {
-        response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];
-    }
-    self.response = response;
-    
-    if (self.completion != nil) {
-        self.completion(self);
-        self.completion = nil;
-    }
-    
-    if (group) {
-        dispatch_group_leave(group);
-    }
-    [[RXNetworkingConfigManager sharedInstance] removeRequest:self];
-
-    
-}
-
-
-
-
-- (void)dealloc
-{
-    // 可以正常释放
-    RXAFnetworkingLog(@"base request dealloc");
-}
-
-
-
-
-
-
 
 
 

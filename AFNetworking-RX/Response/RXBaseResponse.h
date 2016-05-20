@@ -45,4 +45,7 @@ typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
 + (id)networkErrorResponseWithError:(NSError *)error;
 
 
++ (id)responseWithResponseObject:(id)responseObject error:(NSError *)error;
+
+
 @end

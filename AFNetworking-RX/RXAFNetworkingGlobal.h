@@ -12,5 +12,6 @@ FOUNDATION_EXPORT void RXAFnetworkingLog(NSString *format, ...) NS_FORMAT_FUNCTI
 
 
 @interface RXAFNetworkingGlobal : NSObject
++ (NSString *)parametersFromDictionary:(NSDictionary *)dic;
 
 @end

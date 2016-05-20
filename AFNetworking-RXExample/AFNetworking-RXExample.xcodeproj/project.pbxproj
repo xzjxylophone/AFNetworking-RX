@@ -10,6 +10,8 @@
 		6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE05E044DC55EC27A13A7AF8 /* libPods.a */; };
 		C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */; };
 		C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */; };
+		C96B0E611CEEB02700B01976 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */; };
+		C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
 		C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */; };
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
@@ -31,6 +33,10 @@
 		C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
 		C93794771CE2F7AA0065F68C /* RXBatchRequestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBatchRequestObject.h; sourceTree = "<group>"; };
 		C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBatchRequestObject.m; sourceTree = "<group>"; };
+		C96B0E5F1CEEB02700B01976 /* RXSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSimpleHttpManager.h; sourceTree = "<group>"; };
+		C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXSimpleHttpManager.m; sourceTree = "<group>"; };
+		C96B0E631CEEB5CE00B01976 /* RTSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSimpleHttpManager.h; sourceTree = "<group>"; };
+		C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSimpleHttpManager.m; sourceTree = "<group>"; };
 		C9F53DEC1CE1C7F100BF6E1F /* AFNetworking-RXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFNetworking-RXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F53DF01CE1C7F100BF6E1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -94,6 +100,15 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		C96B0E621CEEB58300B01976 /* SimpleHttpManager */ = {
+			isa = PBXGroup;
+			children = (
+				C96B0E631CEEB5CE00B01976 /* RTSimpleHttpManager.h */,
+				C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */,
+			);
+			path = SimpleHttpManager;
+			sourceTree = "<group>";
+		};
 		C9F53DE31CE1C7F100BF6E1F = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +131,7 @@
 		C9F53DEE1CE1C7F100BF6E1F /* AFNetworking-RXExample */ = {
 			isa = PBXGroup;
 			children = (
+				C96B0E621CEEB58300B01976 /* SimpleHttpManager */,
 				C9F53E191CE1D95600BF6E1F /* Request */,
 				C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */,
 				C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */,
@@ -157,6 +173,8 @@
 			children = (
 				C9F53E141CE1CAA400BF6E1F /* RXNetworkingConfigManager.h */,
 				C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */,
+				C96B0E5F1CEEB02700B01976 /* RXSimpleHttpManager.h */,
+				C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -314,8 +332,10 @@
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,
 				C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */,
+				C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */,
 				C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */,
 				C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */,
+				C96B0E611CEEB02700B01976 /* RXSimpleHttpManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
