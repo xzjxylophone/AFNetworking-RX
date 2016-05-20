@@ -23,19 +23,19 @@
 
 
 
-+ (RXSimpleHttpManager *)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion
++ (id)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion
 {
     NSString *url = @"v1/zhanhui";
     NSDictionary *dic = @{@"num":@(num),
                           @"offset":@(offset)};
-    RXSimpleHttpManager *http = [self getActionWithUrl:url parameters:dic completion:completion];
+    id http = [self getActionWithUrl:url parameters:dic completion:completion];
     return http;
 }
 
 
-+ (RXSimpleHttpManager *)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
++ (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
-    RXSimpleHttpManager *http = [[RXSimpleHttpManager alloc] init];
+    RXSimpleHttpManager *http = [[self alloc] init];
     AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
     [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
         // 注意此处的参数: parameters 跟 函数的parameters是不一样的
@@ -56,10 +56,9 @@
 
 
 
-+ (RXSimpleHttpManager *)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
-    
-    RXSimpleHttpManager *http = [[RXSimpleHttpManager alloc] init];
+    RXSimpleHttpManager *http = [[self alloc] init];
     AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
     requestSerializer.timeoutInterval = 45;
     http.httpSessionManager.requestSerializer = requestSerializer;

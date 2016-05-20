@@ -88,6 +88,14 @@
     }];
 }
 
+- (void)testSimple02
+{
+    RTSimpleHttpManager *http = [RTSimpleHttpManager postExhibitionListWithOffset:0 num:1 completion:^(RXBaseResponse *response) {
+        NSLog(@"kkk");
+    }];
+    NSLog(@"http:%@", NSStringFromClass([http class]));
+}
+
 
 #pragma mark - View Life Cycle
 - (void)viewDidLoad {
@@ -96,7 +104,10 @@
     
 //        [self performSelector:@selector(testOneRequest1) withObject:nil afterDelay:1];
 //    [self performSelector:@selector(testOneRequest3) withObject:nil afterDelay:1];
-    [self performSelector:@selector(testSimple01) withObject:nil afterDelay:1];
+    
+    
+//    [self performSelector:@selector(testSimple01) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
     
     
     

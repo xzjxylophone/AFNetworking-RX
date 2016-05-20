@@ -16,11 +16,11 @@
 
 
 
-+ (RXSimpleHttpManager *)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;
++ (id)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;
 
 
-+ (RXSimpleHttpManager *)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
-+ (RXSimpleHttpManager *)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters  completion:(void (^)(RXBaseResponse *response))completion;
++ (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters  completion:(void (^)(RXBaseResponse *response))completion;
 
 
 

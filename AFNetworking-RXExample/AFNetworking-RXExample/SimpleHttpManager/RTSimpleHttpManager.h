@@ -11,6 +11,7 @@
 @interface RTSimpleHttpManager : RXSimpleHttpManager
 
 
++ (id)postExhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;
 
 
 @end
