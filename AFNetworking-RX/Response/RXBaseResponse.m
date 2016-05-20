@@ -136,10 +136,21 @@
 
     RXBaseResponse *response = [[RXBaseResponse alloc] init];
     response.error = error;
-#warning can distinguish timeout or error
-    RXAFnetworkingLog(@"error:%@", error);
-    response.resultCode = cm.networkErrorCode;
-    response.resultMsg = cm.networkErrorMsg;
+    switch (error.code) {
+        case -1001: // 网络超时
+        {
+            response.resultCode = cm.networkTimeoutCode;
+            response.resultMsg = cm.networkTimeoutMsg;
+        }
+            break;
+        default:
+        {
+            // 404  对应的code是 -1011
+            response.resultCode = cm.networkErrorCode;
+            response.resultMsg = cm.networkErrorMsg;
+        }
+            break;
+    }
     return response;
 }
 

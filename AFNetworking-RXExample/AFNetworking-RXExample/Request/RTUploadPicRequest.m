@@ -22,7 +22,9 @@
 
 - (NSString *)requestUrlString
 {
-    return @"v1/uploadpic";;
+    // 测试404
+//    return @"v1/uploadpic1";
+    return @"v1/uploadpic";
 }
 
 - (NSDictionary *)requestParameters
@@ -30,7 +32,11 @@
     return @{@"SESSIONID":self.sessionId,
              @"type":@(self.type)};
 }
-
+// 测试超时
+//- (NSTimeInterval)timeoutInterval
+//{
+//    return 0.01;
+//}
 
 - (void (^)(id<AFMultipartFormData> formData))constructingBodyBlock
 {
