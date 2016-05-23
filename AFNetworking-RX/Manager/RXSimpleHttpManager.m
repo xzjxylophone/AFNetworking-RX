@@ -108,6 +108,13 @@
 }
 
 
+#pragma mark - Public
+
+- (void)cancel
+{
+    [RXNetworkingConfigManager cancelHttpSessionManager:self.httpSessionManager];
+}
+
 
 
 #pragma mark - class private
@@ -131,7 +138,6 @@
     }
     return _httpSessionManager;
 }
-
 
 
 

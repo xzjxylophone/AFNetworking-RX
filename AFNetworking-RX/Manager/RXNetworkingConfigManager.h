@@ -86,6 +86,7 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 - (void)configPostHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval;
 - (void)configGetHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval parameters:(NSDictionary *)parameters;
 
++ (void)cancelHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager;
 
 
 + (RXNetworkingConfigManager *)sharedInstance;

@@ -60,9 +60,7 @@
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
-            
             [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval parameters:weakSelf.requestParameters];
-            
             [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
             } success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -77,7 +75,6 @@
         {
             [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval];
 
-            
             [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
                 [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
@@ -87,6 +84,13 @@
             break;
     }
 }
+
+
+- (void)cancel
+{
+    [RXNetworkingConfigManager cancelHttpSessionManager:self.httpSessionManager];
+}
+
 
 
 

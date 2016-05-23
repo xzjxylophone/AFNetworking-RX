@@ -125,6 +125,12 @@
 }
 
 
++ (void)cancelHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager
+{
+    for (NSURLSessionTask *task in httpSessionManager.tasks) {
+        [task cancel];
+    }
+}
 
 
 
