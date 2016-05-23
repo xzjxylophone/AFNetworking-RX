@@ -8,6 +8,7 @@
 
 #import "RXNetworkingConfigManager.h"
 #import "RXBaseRequest.h"
+#import "RXAFNetworkingGlobal.h"
 @interface RXNetworkingConfigManager ()
 
 @property (nonatomic, strong) NSMutableArray *requestArray;
@@ -84,9 +85,44 @@
 
 
 
+- (void)configPostHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval
+{
+    
+    if (self.customConfigPostHttpSessionManager) {
+        self.customConfigPostHttpSessionManager(httpSessionManager, timeoutInterval);
+    } else {
+        AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+        requestSerializer.timeoutInterval = timeoutInterval;
+        httpSessionManager.requestSerializer = requestSerializer;
+        
+        AFHTTPResponseSerializer *responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", nil];
+        httpSessionManager.responseSerializer = responseSerializer;
+    }
+}
 
-
-
+- (void)configGetHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval parameters:(NSDictionary *)parameters
+{
+    if (self.customConfigGetHttpSessionManager) {
+        self.customConfigGetHttpSessionManager(httpSessionManager, timeoutInterval, parameters);
+    } else {
+        AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
+        requestSerializer.timeoutInterval = timeoutInterval;
+        [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
+            // 注意此处的参数: parameters 跟 函数的parameters是不一样的,也许值是一样的
+            return [RXAFNetworkingGlobal parametersFromDictionary:parameters];
+        }];
+        
+        AFHTTPResponseSerializer *responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+        responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", nil];
+        httpSessionManager.requestSerializer = requestSerializer;
+        httpSessionManager.responseSerializer = responseSerializer;
+    }
+    
+    
+    
+    
+}
 
 
 

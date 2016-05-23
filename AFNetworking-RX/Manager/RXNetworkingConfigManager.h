@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <AFNetworking.h>
 @class RXBaseRequest;
 @class RXBatchRequestObject;
 
@@ -65,6 +65,11 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 // 执行无效的用户token的时候的操作
 @property (nonatomic, copy) void (^customServerResultAction)(NSInteger);
 
+// 自定义的配置post http
+@property (nonatomic, copy) void (^customConfigPostHttpSessionManager)(AFHTTPSessionManager *httpSessionManager, NSTimeInterval timeoutIntervale);
+// 自定义配置get http
+@property (nonatomic, copy) void (^customConfigGetHttpSessionManager)(AFHTTPSessionManager *httpSessionManager, NSTimeInterval timeoutIntervale, NSDictionary *parameters);
+
 
 
 
@@ -77,6 +82,9 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 
 - (void)addBatchRequest:(RXBatchRequestObject *)batchRequest;
 - (void)removeBatchRequest:(RXBatchRequestObject *)batchRequest;
+
+- (void)configPostHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval;
+- (void)configGetHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval parameters:(NSDictionary *)parameters;
 
 
 

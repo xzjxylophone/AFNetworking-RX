@@ -63,6 +63,12 @@
             
         }
         return self;
+    } else if ([responseObject isKindOfClass:[NSData class]]) {
+        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        if (self = [self initWithString:str]) {
+            
+        }
+        return self;
     } else {
         if (self = [self initWithString:responseObject]) {
             

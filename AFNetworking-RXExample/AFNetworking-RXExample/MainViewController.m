@@ -139,6 +139,16 @@
     }];
 }
 
+- (void)testSendSMS001
+{
+    NSString *mobile = @"15901031954";
+    
+//    mobile = @"13720036022";
+    [RTSimpleHttpManager sendVerifyCodeWithMobile:mobile completion:^(RXBaseResponse *response) {
+        NSLog(@"response:%@", response.resultDictionary);
+    }];
+}
+
 #pragma mark - View Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -159,7 +169,10 @@
 //    [self performSelector:@selector(testUpload01) withObject:nil afterDelay:1];
     
     
-    [self performSelector:@selector(testUpload02) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(testUpload02) withObject:nil afterDelay:1];
+    
+    
+    [self performSelector:@selector(testSendSMS001) withObject:nil afterDelay:1];
     
     
     

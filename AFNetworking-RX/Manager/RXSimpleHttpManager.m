@@ -61,13 +61,8 @@
 + (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
     RXSimpleHttpManager *http = [[self alloc] init];
-    AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
-    [requestSerializer setQueryStringSerializationWithBlock:^NSString *(NSURLRequest *request, id parameters, NSError **error) {
-        // 注意此处的参数: parameters 跟 函数的parameters是不一样的,也许值是一样的
-        return [RXAFNetworkingGlobal parametersFromDictionary:parameters];
-    }];
-    requestSerializer.timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
-    http.httpSessionManager.requestSerializer = requestSerializer;
+    NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
+    [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval parameters:parameters];
     [http.httpSessionManager GET:url parameters:parameters progress:^(NSProgress *downloadProgress) {
         // Do Noting
     } success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -84,9 +79,10 @@
 + (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
     RXSimpleHttpManager *http = [[self alloc] init];
-    AFHTTPRequestSerializer *requestSerializer = [[AFHTTPRequestSerializer alloc] init];
-    requestSerializer.timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
-    http.httpSessionManager.requestSerializer = requestSerializer;
+    NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
+    [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval];
+
+    
     [http.httpSessionManager POST:url parameters:parameters progress:^(NSProgress *uploadProgress) {
         // Do Noting
     } success:^(NSURLSessionDataTask *task, id responseObject) {

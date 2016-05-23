@@ -13,5 +13,6 @@
 
 + (id)postExhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;
 
++ (id)sendVerifyCodeWithMobile:(NSString *)mobile completion:(void (^)(RXBaseResponse *response))completion;
 
 @end

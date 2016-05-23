@@ -33,8 +33,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 #warning Config request
     RXNetworkingConfigManager *cm = [RXNetworkingConfigManager sharedInstance];
+    // 展会的
     cm.baseUrlString = @"http://api.hiexhibition.com";
-    cm.timeoutInterval = 20;
+    // 壹壹租车的
+    cm.baseUrlString = @"http://api.yiyizuche.cn/service";
+    cm.timeoutInterval = 45;
     cm.resultCodeKey = @"status";
     cm.resultMsgKey = @"msg";
     cm.customServerResultAction = ^(NSInteger code) {
