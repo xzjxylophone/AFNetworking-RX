@@ -9,6 +9,7 @@
 #import "RXNetworkingConfigManager.h"
 #import "RXBaseRequest.h"
 #import "RXAFNetworkingGlobal.h"
+#import "RXBaseResponse.h"
 @interface RXNetworkingConfigManager ()
 
 @property (nonatomic, strong) NSMutableArray *requestArray;
@@ -132,6 +133,126 @@
     }
 }
 
+
+
+
+#pragma mark -
+
++ (void)networkResponseAnalysisThreadEntryPoint
+{
+    @autoreleasepool {
+        [[NSThread currentThread] setName:@"AFNetworking+RX"];
+        NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
+        [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [runLoop run];
+    }
+}
+
+
++ (NSThread *)networkResponseAnalysisThread
+{
+    static NSThread *_thread = nil;
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        _thread = [[NSThread alloc] initWithTarget:self selector:@selector(networkResponseAnalysisThreadEntryPoint) object:nil];
+        [_thread start];
+    });
+    return _thread;
+}
+
+
+
+#pragma mark - Private
++ (void)performInOtherRunLoopWithDictionary:(NSDictionary *)dic
+{
+    RXBaseRequest *request = nil;
+    id responseObject = nil;
+    NSError *error = nil;
+    dispatch_group_t group = NULL;
+    void (^completion)(RXBaseResponse *response) = nil;
+    
+    id idRequest = dic[@"request"];
+    if (![idRequest isKindOfClass:[NSNull class]]) {
+        request = idRequest;
+    }
+    id idResponseObject = dic[@"responseObject"];
+    if (![idResponseObject isKindOfClass:[NSNull class]]) {
+        responseObject = idResponseObject;
+    }
+    id idError = dic[@"error"];
+    if (![idError isKindOfClass:[NSNull class]]) {
+        error = idError;
+    }
+    id idGroup = dic[@"group"];
+    if (![idGroup isKindOfClass:[NSNull class]]) {
+        group = idGroup;
+    }
+    
+    id idCompletion = dic[@"completion"];
+    if (![idCompletion isKindOfClass:[NSNull class]]) {
+        completion = (void (^)(RXBaseResponse *response))idCompletion;
+    }
+    [self printMainAndCurrentRunLoopInfoWithDes:@"performInOtherRunLoopWithDictionary"];
+
+    if (request) {
+        request.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (request.completion != nil) {
+                [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
+                request.completion(request);
+                request.completion = nil;
+            }
+            if (group) {
+                dispatch_group_leave(group);
+            }
+            [[RXNetworkingConfigManager sharedInstance] removeRequest:request];
+        });
+    } else if (completion) {
+        RXBaseResponse *response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
+            completion(response);
+        });
+    } else {
+        // Do Nothing
+    }
+    
+    
+    
+}
+
++ (void)analysisInOtherRunLoopWithRequest:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion
+{
+    
+    NSThread *thread = [self networkResponseAnalysisThread];
+    NSDictionary *dic = @{@"request":request ? request : [NSNull null],
+                          @"responseObject":responseObject ? responseObject : [NSNull null],
+                          @"error":error ? error : [NSNull null],
+                          @"group":group ? group : [NSNull null]};
+    NSMutableDictionary *mutDic = [NSMutableDictionary dictionaryWithDictionary:dic];
+    if (completion) {
+        [mutDic setValue:completion forKey:@"completion"];
+    } else {
+        [mutDic setValue:[NSNull null] forKey:@"completion"];
+
+    }
+    [self printMainAndCurrentRunLoopInfoWithDes:@"safeBlock_completion"];
+    // 放到其他的RunLoop中去
+    [self performSelector:@selector(performInOtherRunLoopWithDictionary:) onThread:thread withObject:mutDic waitUntilDone:YES modes:@[NSDefaultRunLoopMode]];
+}
+
++ (void)printMainAndCurrentRunLoopInfoWithDes:(NSString *)des
+{
+#if DEBUG
+    CFRunLoopRef mainRunLoopRef = CFRunLoopGetMain();
+    CFStringRef mainStringRef = CFRunLoopCopyCurrentMode(mainRunLoopRef);
+    CFRunLoopRef curRunLoopRef = CFRunLoopGetCurrent();
+    CFStringRef curStringRef = CFRunLoopCopyCurrentMode(curRunLoopRef);
+    
+    NSLog(@"%@ main:%p:%@ cur:%p:%@", des, mainRunLoopRef, (__bridge NSString *)mainStringRef, curRunLoopRef, (__bridge NSString *)curStringRef);
+    
+#endif
+}
 
 
 

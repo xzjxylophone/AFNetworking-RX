@@ -12,6 +12,8 @@
 #import "RXBaseResponse.h"
 
 
+
+
 @interface RXBaseRequest ()
 
 @property (nonatomic, strong) AFHTTPSessionManager *httpSessionManager;
@@ -22,6 +24,9 @@
 
 
 @implementation RXBaseRequest
+
+
+
 
 
 #pragma mark - Public
@@ -64,9 +69,9 @@
             [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
             } success:^(NSURLSessionDataTask *task, id responseObject) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
+                [weakSelf analysisInOtherRunLoopWithResponseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
+                [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
             }];
         }
             break;
@@ -76,9 +81,9 @@
             [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval];
 
             [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:responseObject error:nil group:group];
+                [weakSelf analysisInOtherRunLoopWithResponseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
-                [weakSelf safeBlock_completion:weakSelf responseObject:nil error:error group:group];
+                [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
             }];
         }
             break;
@@ -93,25 +98,14 @@
 
 
 
+#pragma mark - Private
 
-#pragma mark - Safe Block
-- (void)safeBlock_completion:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
+- (void)analysisInOtherRunLoopWithResponseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
 {
-    // 全部放在主线程
-    self.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
-    
-    if (self.completion != nil) {
-        self.completion(self);
-        self.completion = nil;
-    }
-    
-    if (group) {
-        dispatch_group_leave(group);
-    }
-    [[RXNetworkingConfigManager sharedInstance] removeRequest:self];
-
-    
+    [RXNetworkingConfigManager analysisInOtherRunLoopWithRequest:self responseObject:responseObject error:error group:group completion:nil];
 }
+
+
 
 
 

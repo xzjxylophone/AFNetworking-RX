@@ -36,7 +36,7 @@
     // 展会的
     cm.baseUrlString = @"http://api.hiexhibition.com";
     // 壹壹租车的
-    cm.baseUrlString = @"http://api.yiyizuche.cn/service";
+//    cm.baseUrlString = @"http://api.yiyizuche.cn/service";
     cm.timeoutInterval = 45;
     cm.resultCodeKey = @"status";
     cm.resultMsgKey = @"msg";

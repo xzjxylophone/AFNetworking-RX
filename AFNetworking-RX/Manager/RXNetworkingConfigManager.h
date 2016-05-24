@@ -10,6 +10,7 @@
 #import <AFNetworking.h>
 @class RXBaseRequest;
 @class RXBatchRequestObject;
+@class RXBaseResponse;
 
 typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
     kE_RX_NetworkExceptionType_NetworkError         =           400400,
@@ -87,6 +88,8 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 - (void)configGetHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager timeoutInterval:(NSTimeInterval)timeoutInterval parameters:(NSDictionary *)parameters;
 
 + (void)cancelHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager;
+
++ (void)analysisInOtherRunLoopWithRequest:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion;
 
 
 + (RXNetworkingConfigManager *)sharedInstance;

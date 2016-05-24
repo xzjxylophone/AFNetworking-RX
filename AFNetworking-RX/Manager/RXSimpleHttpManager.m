@@ -122,8 +122,7 @@
 + (void)resultWithResponseObject:(id)responseObject error:(NSError *)error completion:(void (^)(RXBaseResponse *response))completion
 {
     if (completion) {
-        RXBaseResponse *response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
-        completion(response);
+        [RXNetworkingConfigManager analysisInOtherRunLoopWithRequest:nil responseObject:responseObject error:error group:nil completion:completion];
     }
 
 }

@@ -64,8 +64,7 @@
         }
         return self;
     } else if ([responseObject isKindOfClass:[NSData class]]) {
-        NSString *str = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        if (self = [self initWithString:str]) {
+        if (self = [self initWithData:responseObject]) {
             
         }
         return self;
@@ -80,8 +79,17 @@
 
 - (id)initWithString:(NSString *)str
 {
+    NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
+    if (self = [self initWithData:jsonData]) {
+        
+    }
+    return self;
+}
+
+- (id)initWithData:(NSData *)data
+{
     RXNetworkingConfigManager *cm = [RXNetworkingConfigManager sharedInstance];
-    if (str.length == 0) {
+    if (data.length == 0) {
         if (self = [self init]) {
             self.resultCode = cm.serverNoDataCode;
             self.resultMsg = cm.serverNoDataMsg;
@@ -89,8 +97,7 @@
         return self;
     }
     
-    NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableLeaves error:nil];
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
     if (dic == nil) {
         if (self = [self init]) {
             self.resultCode = cm.serverInvalidJSONCode;
