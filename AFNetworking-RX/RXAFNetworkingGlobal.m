@@ -7,15 +7,35 @@
 //
 
 #import "RXAFNetworkingGlobal.h"
-void RXAFnetworkingLog(NSString *format, ...)
+
+#import "RXAFNetworkingDefine.h"
+void RXAFnetworkingDebugLog(NSString *format, ...)
 {
+    
 #ifdef DEBUG
+#if k_RX_SwitchLog_Debug
     va_list argptr;
     va_start(argptr, format);
     NSLogv(format, argptr);
     va_end(argptr);
 #endif
+#endif
 }
+
+void RXAFnetworkingPrintUrlAndParameters(NSString *format, ...)
+{
+    
+#ifdef DEBUG
+#if k_RX_SwitchLog_URL_Parameter
+    va_list argptr;
+    va_start(argptr, format);
+    NSLogv(format, argptr);
+    va_end(argptr);
+#endif
+#endif
+}
+
+
 
 
 @implementation RXAFNetworkingGlobal

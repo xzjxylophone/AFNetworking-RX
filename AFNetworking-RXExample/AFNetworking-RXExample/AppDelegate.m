@@ -40,6 +40,8 @@
     cm.timeoutInterval = 45;
     cm.resultCodeKey = @"status";
     cm.resultMsgKey = @"msg";
+    cm.suffixParameters = @{@"type":@"iOS",
+                            @"version":@"1.01"};
     cm.customServerResultAction = ^(NSInteger code) {
         NSLog(@"customServerResultAction code:%zd", code);
     };

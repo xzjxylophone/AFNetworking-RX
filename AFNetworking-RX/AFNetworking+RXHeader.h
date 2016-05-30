@@ -12,6 +12,7 @@
 
 
 
+#import "RXAFNetworkingDefine.h"
 
 // manager
 #import "RXNetworkingConfigManager.h"

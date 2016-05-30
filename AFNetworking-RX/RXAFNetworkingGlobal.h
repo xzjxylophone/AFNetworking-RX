@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-FOUNDATION_EXPORT void RXAFnetworkingLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
+FOUNDATION_EXPORT void RXAFnetworkingDebugLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
+
+
+FOUNDATION_EXPORT void RXAFnetworkingPrintUrlAndParameters(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 
 

@@ -10,6 +10,12 @@
 #import "RXBaseRequest.h"
 #import "RXAFNetworkingGlobal.h"
 #import "RXBaseResponse.h"
+#import "RXAFNetworkingDefine.h"
+
+
+// 调试信息
+#define k_RX_RunloopDebug       0
+
 @interface RXNetworkingConfigManager ()
 
 @property (nonatomic, strong) NSMutableArray *requestArray;
@@ -30,6 +36,7 @@
         self.resultMsgKey = @"msg";
         self.resultCodeKey = @"code";
         self.successResultCode = 0;
+        self.suffixParameters = [NSDictionary dictionary];
         
         
         self.networkErrorMsg = @"网络错误";
@@ -243,15 +250,15 @@
 
 + (void)printMainAndCurrentRunLoopInfoWithDes:(NSString *)des
 {
-#if DEBUG
+    
+#if k_RX_RunloopDebug
     CFRunLoopRef mainRunLoopRef = CFRunLoopGetMain();
     CFStringRef mainStringRef = CFRunLoopCopyCurrentMode(mainRunLoopRef);
     CFRunLoopRef curRunLoopRef = CFRunLoopGetCurrent();
     CFStringRef curStringRef = CFRunLoopCopyCurrentMode(curRunLoopRef);
-    
     NSLog(@"%@ main:%p:%@ cur:%p:%@", des, mainRunLoopRef, (__bridge NSString *)mainStringRef, curRunLoopRef, (__bridge NSString *)curStringRef);
-    
 #endif
+    
 }
 
 

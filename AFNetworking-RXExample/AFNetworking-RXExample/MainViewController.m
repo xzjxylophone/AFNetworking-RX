@@ -163,7 +163,7 @@
 //    [self performSelector:@selector(testOneRequest2) withObject:nil afterDelay:1];
     
     
-    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
+//    [self performSelector:@selector(testOneRequest1) withObject:nil afterDelay:1];
     
     
 //    [self performSelector:@selector(testUpload01) withObject:nil afterDelay:1];
@@ -172,7 +172,7 @@
 //    [self performSelector:@selector(testUpload02) withObject:nil afterDelay:1];
     
     
-//    [self performSelector:@selector(testSendSMS001) withObject:nil afterDelay:1];
+    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
     
     
     

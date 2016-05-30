@@ -31,10 +31,14 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
 
 
+
 // resultCodeKey default @"code"
 @property (nonatomic, copy) NSString *resultCodeKey;
 // resultMsgKey  default @"msg"
 @property (nonatomic, copy) NSString *resultMsgKey;
+
+// defautl [NSDictionary dictionary]
+@property (nonatomic, strong) NSDictionary *suffixParameters;
 
 
 

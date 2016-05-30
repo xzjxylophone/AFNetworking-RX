@@ -40,6 +40,7 @@
 		C90D14B41CFC2B4000461480 /* RXBatchRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBatchRequestObject.m; sourceTree = "<group>"; };
 		C90D14B81CFC2B5200461480 /* RXBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseResponse.h; sourceTree = "<group>"; };
 		C90D14B91CFC2B5200461480 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
+		C90D14BB1CFC3A8F00461480 /* RXAFNetworkingDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RXAFNetworkingDefine.h; sourceTree = "<group>"; };
 		C96B0E631CEEB5CE00B01976 /* RTSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSimpleHttpManager.h; sourceTree = "<group>"; };
 		C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSimpleHttpManager.m; sourceTree = "<group>"; };
 		C96B0E661CEEFB9B00B01976 /* RTUploadPicRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTUploadPicRequest.h; sourceTree = "<group>"; };
@@ -188,6 +189,7 @@
 				C9F53E171CE1CB7600BF6E1F /* AFNetworking+RXHeader.h */,
 				C9F53E1D1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.h */,
 				C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */,
+				C90D14BB1CFC3A8F00461480 /* RXAFNetworkingDefine.h */,
 			);
 			name = "AFNetworking-RX";
 			path = "../AFNetworking-RX";

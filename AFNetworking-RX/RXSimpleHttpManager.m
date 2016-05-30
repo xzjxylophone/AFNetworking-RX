@@ -10,6 +10,8 @@
 #import "RXNetworkingConfigManager.h"
 #import "RXAFNetworkingGlobal.h"
 #import "RXBaseResponse.h"
+#import "RXNetworkingConfigManager.h"
+
 
 @interface RXSimpleHttpManager ()
 
@@ -60,6 +62,12 @@
 
 + (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
+    
+    parameters = [self mergerSuffixWithDictionary:parameters];
+
+    
+    
+    
     RXSimpleHttpManager *http = [[self alloc] init];
     NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
     [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval parameters:parameters];
@@ -70,6 +78,12 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
+    
+    
+    
+    
+    [self printURL:url parameters:parameters];
+    
     return http;
     
 }
@@ -78,6 +92,12 @@
 
 + (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
+    
+    
+    
+    
+    parameters = [self mergerSuffixWithDictionary:parameters];
+    
     RXSimpleHttpManager *http = [[self alloc] init];
     NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
     [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval];
@@ -90,6 +110,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
+    [self printURL:url parameters:parameters];
     return http;
 }
 
@@ -98,15 +119,40 @@
 
 + (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
 {
+    parameters = [self mergerSuffixWithDictionary:parameters];
     RXSimpleHttpManager *http = [[self alloc] init];
     [http.httpSessionManager POST:url parameters:parameters constructingBodyWithBlock:constructingBodyBlock progress:progress success:^(NSURLSessionDataTask *task, id responseObject) {
         [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
+    [self printURL:url parameters:parameters];
     return http;
 }
 
++ (NSDictionary *)mergerSuffixWithDictionary:(NSDictionary *)dic
+{
+    NSDictionary *dic1 = dic;
+    NSDictionary *dic2 = [RXNetworkingConfigManager sharedInstance].suffixParameters;
+    NSMutableDictionary *resultParameters = nil;
+    if (dic1) {
+        resultParameters = [NSMutableDictionary dictionaryWithDictionary:dic1];
+    } else {
+        resultParameters = [NSMutableDictionary dictionary];
+    }
+    if (dic2 != nil) {
+        [resultParameters setValuesForKeysWithDictionary:dic2];
+    }
+    return resultParameters;
+}
+
++ (void)printURL:(NSString *)url parameters:(NSDictionary *)parameters
+{
+    NSString *host = [RXNetworkingConfigManager sharedInstance].baseUrlString;
+    url = [NSString stringWithFormat:@"%@/%@", host, url];
+    NSString *str = [RXAFNetworkingGlobal parametersFromDictionary:parameters];
+    RXAFnetworkingPrintUrlAndParameters(@"url:%@ paramters:%@", url, str);
+}
 
 #pragma mark - Public
 

@@ -10,6 +10,7 @@
 #import "RXNetworkingConfigManager.h"
 #import "RXAFNetworkingGlobal.h"
 #import "RXBaseResponse.h"
+#import "RXAFNetworkingDefine.h"
 
 
 
@@ -62,11 +63,18 @@
         self.httpSessionManager.completionQueue = queue;
     }
     
+
+
+    NSString *str = [RXAFNetworkingGlobal parametersFromDictionary:self.reallyParameters];
+    RXAFnetworkingPrintUrlAndParameters(@"url:%@/%@ parameters:%@", self.baseUrlString, self.requestUrlString, str);
+    
+    
+    
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
-            [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval parameters:weakSelf.requestParameters];
-            [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.requestParameters progress:^(NSProgress * _Nonnull downloadProgress) {
+            [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval parameters:weakSelf.reallyParameters];
+            [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.reallyParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
             } success:^(NSURLSessionDataTask *task, id responseObject) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:responseObject error:nil group:group];
@@ -80,7 +88,7 @@
         {
             [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval];
 
-            [self.httpSessionManager POST:self.requestUrlString parameters:self.requestParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
+            [self.httpSessionManager POST:self.requestUrlString parameters:self.reallyParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
@@ -88,6 +96,8 @@
         }
             break;
     }
+    
+    
 }
 
 
@@ -113,7 +123,7 @@
 - (void)dealloc
 {
     // 可以正常释放
-    RXAFnetworkingLog(@"base request dealloc");
+    RXAFnetworkingDebugLog(@"base request dealloc");
 }
 
 
@@ -150,6 +160,25 @@
 - (NSDictionary *)requestParameters
 {
     return [NSDictionary dictionary];
+}
+- (NSDictionary *)suffixParameters
+{
+    return [RXNetworkingConfigManager sharedInstance].suffixParameters;
+}
+- (NSDictionary *)reallyParameters
+{
+    NSDictionary *dic1 = self.requestParameters;
+    NSDictionary *dic2 = self.suffixParameters;
+    NSMutableDictionary *result = nil;
+    if (dic1) {
+        result = [NSMutableDictionary dictionaryWithDictionary:dic1];
+    } else {
+        result = [NSMutableDictionary dictionary];
+    }
+    if (dic2 != nil) {
+        [result setValuesForKeysWithDictionary:dic2];
+    }
+    return result;
 }
 - (NSTimeInterval)timeoutInterval
 {

@@ -34,7 +34,7 @@
 }
 - (void)dealloc
 {
-    RXAFnetworkingLog(@"batch request object dealloc");
+    RXAFnetworkingDebugLog(@"batch request object dealloc");
 }
 
 - (void)startWithCompletion:(void (^)(RXBatchRequestObject *batchRequest))completion

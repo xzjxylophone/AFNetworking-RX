@@ -48,6 +48,11 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 @property (nonatomic, readonly) E_RXRequestMethod e_RXRequestMethod;
 // default [NSDictionary dictionary]
 @property (nonatomic, readonly) NSDictionary *requestParameters;
+// default RXNetworkingConfigManager suffixParameters
+@property (nonatomic, readonly) NSDictionary *suffixParameters;
+
+// requestParameters add suffixParameters
+@property (nonatomic, readonly) NSDictionary *reallyParameters;
 
 
 @property (nonatomic, strong) RXBaseResponse *response;
