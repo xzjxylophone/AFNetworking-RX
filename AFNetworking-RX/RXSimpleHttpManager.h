@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking.h>
+#import "AFNetworking.h"
 @class RXBaseResponse;
 
 @interface RXSimpleHttpManager : NSObject
