@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE05E044DC55EC27A13A7AF8 /* libPods.a */; };
-		C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */; };
-		C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */; };
-		C96B0E611CEEB02700B01976 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */; };
+		C90D14AE1CFC2B2C00461480 /* RXNetworkingConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */; };
+		C90D14AF1CFC2B2C00461480 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */; };
+		C90D14B51CFC2B4000461480 /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B21CFC2B4000461480 /* RXBaseRequest.m */; };
+		C90D14B61CFC2B4000461480 /* RXBatchRequestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B41CFC2B4000461480 /* RXBatchRequestObject.m */; };
+		C90D14BA1CFC2B5200461480 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B91CFC2B5200461480 /* RXBaseResponse.m */; };
 		C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */; };
 		C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
@@ -18,8 +20,6 @@
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
 		C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E071CE1C92400BF6E1F /* MainViewController.m */; };
 		C9F53E0A1CE1C92400BF6E1F /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C9F53E081CE1C92400BF6E1F /* MainViewController.xib */; };
-		C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */; };
-		C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */; };
 		C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1B1CE1D97E00BF6E1F /* RTExhibitionListRequest.m */; };
 		C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */; };
 		C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53E261CE1E78B00BF6E1F /* RTBaseCityRequest.m */; };
@@ -30,12 +30,16 @@
 		37563F2A3724139D03098355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BE05E044DC55EC27A13A7AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		C900E3D81CE2D8750097D6F8 /* RXBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseResponse.h; sourceTree = "<group>"; };
-		C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
-		C93794771CE2F7AA0065F68C /* RXBatchRequestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBatchRequestObject.h; sourceTree = "<group>"; };
-		C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBatchRequestObject.m; sourceTree = "<group>"; };
-		C96B0E5F1CEEB02700B01976 /* RXSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSimpleHttpManager.h; sourceTree = "<group>"; };
-		C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXSimpleHttpManager.m; sourceTree = "<group>"; };
+		C90D14AA1CFC2B2C00461480 /* RXNetworkingConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingConfigManager.h; sourceTree = "<group>"; };
+		C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingConfigManager.m; sourceTree = "<group>"; };
+		C90D14AC1CFC2B2C00461480 /* RXSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSimpleHttpManager.h; sourceTree = "<group>"; };
+		C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXSimpleHttpManager.m; sourceTree = "<group>"; };
+		C90D14B11CFC2B4000461480 /* RXBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseRequest.h; sourceTree = "<group>"; };
+		C90D14B21CFC2B4000461480 /* RXBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseRequest.m; sourceTree = "<group>"; };
+		C90D14B31CFC2B4000461480 /* RXBatchRequestObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBatchRequestObject.h; sourceTree = "<group>"; };
+		C90D14B41CFC2B4000461480 /* RXBatchRequestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBatchRequestObject.m; sourceTree = "<group>"; };
+		C90D14B81CFC2B5200461480 /* RXBaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseResponse.h; sourceTree = "<group>"; };
+		C90D14B91CFC2B5200461480 /* RXBaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseResponse.m; sourceTree = "<group>"; };
 		C96B0E631CEEB5CE00B01976 /* RTSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTSimpleHttpManager.h; sourceTree = "<group>"; };
 		C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSimpleHttpManager.m; sourceTree = "<group>"; };
 		C96B0E661CEEFB9B00B01976 /* RTUploadPicRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTUploadPicRequest.h; sourceTree = "<group>"; };
@@ -49,11 +53,7 @@
 		C9F53E061CE1C92400BF6E1F /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		C9F53E071CE1C92400BF6E1F /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		C9F53E081CE1C92400BF6E1F /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXBaseRequest.h; sourceTree = "<group>"; };
-		C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXBaseRequest.m; sourceTree = "<group>"; };
-		C9F53E141CE1CAA400BF6E1F /* RXNetworkingConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingConfigManager.h; sourceTree = "<group>"; };
-		C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingConfigManager.m; sourceTree = "<group>"; };
-		C9F53E171CE1CB7600BF6E1F /* AFNetworking-RXHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXHeader.h"; sourceTree = "<group>"; };
+		C9F53E171CE1CB7600BF6E1F /* AFNetworking+RXHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AFNetworking+RXHeader.h"; sourceTree = "<group>"; };
 		C9F53E181CE1CCBE00BF6E1F /* AFNetworking-RXExample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-RXExample-Prefix.pch"; sourceTree = "<group>"; };
 		C9F53E1A1CE1D97E00BF6E1F /* RTExhibitionListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTExhibitionListRequest.h; sourceTree = "<group>"; };
 		C9F53E1B1CE1D97E00BF6E1F /* RTExhibitionListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTExhibitionListRequest.m; sourceTree = "<group>"; };
@@ -94,13 +94,35 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C900E3D71CE2D82C0097D6F8 /* Response */ = {
+		C90D14A91CFC2B1B00461480 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				C900E3D81CE2D8750097D6F8 /* RXBaseResponse.h */,
-				C900E3D91CE2D8750097D6F8 /* RXBaseResponse.m */,
+				C90D14AA1CFC2B2C00461480 /* RXNetworkingConfigManager.h */,
+				C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */,
+				C90D14AC1CFC2B2C00461480 /* RXSimpleHttpManager.h */,
+				C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */,
 			);
-			path = Response;
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		C90D14B01CFC2B3400461480 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				C90D14B11CFC2B4000461480 /* RXBaseRequest.h */,
+				C90D14B21CFC2B4000461480 /* RXBaseRequest.m */,
+				C90D14B31CFC2B4000461480 /* RXBatchRequestObject.h */,
+				C90D14B41CFC2B4000461480 /* RXBatchRequestObject.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		C90D14B71CFC2B4600461480 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				C90D14B81CFC2B5200461480 /* RXBaseResponse.h */,
+				C90D14B91CFC2B5200461480 /* RXBaseResponse.m */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		C96B0E621CEEB58300B01976 /* SimpleHttpManager */ = {
@@ -160,37 +182,15 @@
 		C9F53E0B1CE1CA0400BF6E1F /* AFNetworking-RX */ = {
 			isa = PBXGroup;
 			children = (
-				C9F53E171CE1CB7600BF6E1F /* AFNetworking-RXHeader.h */,
+				C90D14B71CFC2B4600461480 /* Response */,
+				C90D14B01CFC2B3400461480 /* Request */,
+				C90D14A91CFC2B1B00461480 /* Manager */,
+				C9F53E171CE1CB7600BF6E1F /* AFNetworking+RXHeader.h */,
 				C9F53E1D1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.h */,
 				C9F53E1E1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m */,
-				C9F53E0F1CE1CA7800BF6E1F /* Manager */,
-				C9F53E101CE1CA7800BF6E1F /* Request */,
-				C900E3D71CE2D82C0097D6F8 /* Response */,
 			);
 			name = "AFNetworking-RX";
 			path = "../AFNetworking-RX";
-			sourceTree = "<group>";
-		};
-		C9F53E0F1CE1CA7800BF6E1F /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				C9F53E141CE1CAA400BF6E1F /* RXNetworkingConfigManager.h */,
-				C9F53E151CE1CAA400BF6E1F /* RXNetworkingConfigManager.m */,
-				C96B0E5F1CEEB02700B01976 /* RXSimpleHttpManager.h */,
-				C96B0E601CEEB02700B01976 /* RXSimpleHttpManager.m */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
-		C9F53E101CE1CA7800BF6E1F /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				C9F53E111CE1CA7800BF6E1F /* RXBaseRequest.h */,
-				C9F53E121CE1CA7800BF6E1F /* RXBaseRequest.m */,
-				C93794771CE2F7AA0065F68C /* RXBatchRequestObject.h */,
-				C93794781CE2F7AA0065F68C /* RXBatchRequestObject.m */,
-			);
-			path = Request;
 			sourceTree = "<group>";
 		};
 		C9F53E191CE1D95600BF6E1F /* Request */ = {
@@ -329,19 +329,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9F53E1C1CE1D97E00BF6E1F /* RTExhibitionListRequest.m in Sources */,
-				C900E3DA1CE2D8750097D6F8 /* RXBaseResponse.m in Sources */,
+				C90D14AF1CFC2B2C00461480 /* RXSimpleHttpManager.m in Sources */,
+				C90D14AE1CFC2B2C00461480 /* RXNetworkingConfigManager.m in Sources */,
 				C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */,
-				C93794791CE2F7AA0065F68C /* RXBatchRequestObject.m in Sources */,
-				C9F53E131CE1CA7800BF6E1F /* RXBaseRequest.m in Sources */,
 				C9F53E2A1CE1E9BF00BF6E1F /* RTLoginRequest.m in Sources */,
+				C90D14B61CFC2B4000461480 /* RXBatchRequestObject.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
 				C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,
-				C9F53E161CE1CAA400BF6E1F /* RXNetworkingConfigManager.m in Sources */,
+				C90D14B51CFC2B4000461480 /* RXBaseRequest.m in Sources */,
 				C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */,
 				C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */,
 				C9F53E1F1CE1DD1600BF6E1F /* RXAFNetworkingGlobal.m in Sources */,
-				C96B0E611CEEB02700B01976 /* RXSimpleHttpManager.m in Sources */,
+				C90D14BA1CFC2B5200461480 /* RXBaseResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
