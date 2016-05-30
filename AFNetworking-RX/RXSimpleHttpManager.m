@@ -53,22 +53,32 @@
 
 #pragma mark - Class Method
 
-
-
-
-
-
-
-
 + (id)getActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
-    
-    parameters = [self mergerSuffixWithDictionary:parameters];
+    NSString *baseUrlString = [RXNetworkingConfigManager sharedInstance].baseUrlString;
+    return [self getActionWithBaseUrl:baseUrlString url:url parameters:parameters completion:completion];
+}
 
-    
-    
-    
+
+
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
+{
+    NSString *baseUrlString = [RXNetworkingConfigManager sharedInstance].baseUrlString;
+    return [self postActionWithBaseUrl:baseUrlString url:url parameters:parameters completion:completion];
+}
+
++ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
+{
+    NSString *baseUrlString = [RXNetworkingConfigManager sharedInstance].baseUrlString;
+    return [self postActionWithBaseUrl:baseUrlString url:url parameters:parameters image:image constructingBodyBlock:constructingBodyBlock progress:progress completion:completion];
+}
+
+
++ (id)getActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
+{
+    parameters = [self mergerSuffixWithDictionary:parameters];
     RXSimpleHttpManager *http = [[self alloc] init];
+    http.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
     NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
     [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval parameters:parameters];
     [http.httpSessionManager GET:url parameters:parameters progress:^(NSProgress *downloadProgress) {
@@ -78,31 +88,16 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
-    
-    
-    
-    
     [self printURL:url parameters:parameters];
-    
     return http;
-    
 }
-
-
-
-+ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
++ (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
 {
-    
-    
-    
-    
     parameters = [self mergerSuffixWithDictionary:parameters];
-    
     RXSimpleHttpManager *http = [[self alloc] init];
+    http.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
     NSTimeInterval timeoutInterval = [RXNetworkingConfigManager sharedInstance].timeoutInterval;
     [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:http.httpSessionManager timeoutInterval:timeoutInterval];
-
-    
     [http.httpSessionManager POST:url parameters:parameters progress:^(NSProgress *uploadProgress) {
         // Do Noting
     } success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -113,14 +108,11 @@
     [self printURL:url parameters:parameters];
     return http;
 }
-
-
-
-
-+ (id)postActionWithUrl:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
++ (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
 {
     parameters = [self mergerSuffixWithDictionary:parameters];
     RXSimpleHttpManager *http = [[self alloc] init];
+    http.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
     [http.httpSessionManager POST:url parameters:parameters constructingBodyWithBlock:constructingBodyBlock progress:progress success:^(NSURLSessionDataTask *task, id responseObject) {
         [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
@@ -130,6 +122,8 @@
     return http;
 }
 
+
+#pragma mark - Private
 + (NSDictionary *)mergerSuffixWithDictionary:(NSDictionary *)dic
 {
     NSDictionary *dic1 = dic;
@@ -174,15 +168,7 @@
 }
 
 
-#pragma mark - Property
-- (AFHTTPSessionManager *)httpSessionManager
-{
-    if (_httpSessionManager == nil) {
-        NSString *baseUrlString = [RXNetworkingConfigManager sharedInstance].baseUrlString;
-        _httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrlString]];
-    }
-    return _httpSessionManager;
-}
+
 
 
 
