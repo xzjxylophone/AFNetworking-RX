@@ -88,7 +88,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
-    [self printURL:url parameters:parameters];
+    [self printBaseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
@@ -105,7 +105,7 @@
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
-    [self printURL:url parameters:parameters];
+    [self printBaseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
@@ -113,12 +113,17 @@
     parameters = [self mergerSuffixWithDictionary:parameters];
     RXSimpleHttpManager *http = [[self alloc] init];
     http.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+    
+    AFHTTPResponseSerializer *responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html", @"image/jpeg", @"text/text", nil];
+    http.httpSessionManager.responseSerializer = responseSerializer;
+    
     [http.httpSessionManager POST:url parameters:parameters constructingBodyWithBlock:constructingBodyBlock progress:progress success:^(NSURLSessionDataTask *task, id responseObject) {
         [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
     }];
-    [self printURL:url parameters:parameters];
+    [self printBaseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 
@@ -140,12 +145,11 @@
     return resultParameters;
 }
 
-+ (void)printURL:(NSString *)url parameters:(NSDictionary *)parameters
++ (void)printBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters
 {
-    NSString *host = [RXNetworkingConfigManager sharedInstance].baseUrlString;
-    url = [NSString stringWithFormat:@"%@/%@", host, url];
+    NSString *tmp = [NSString stringWithFormat:@"%@/%@", baseUrl, url];
     NSString *str = [RXAFNetworkingGlobal parametersFromDictionary:parameters];
-    RXAFnetworkingPrintUrlAndParameters(@"url:%@ paramters:%@", url, str);
+    RXAFnetworkingPrintUrlAndParameters(@"url:%@ paramters:%@", tmp, str);
 }
 
 #pragma mark - Public
