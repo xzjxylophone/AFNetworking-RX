@@ -31,6 +31,7 @@
 + (id)getActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion;
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion;
++ (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image useExtraParameters:(BOOL)useExtraParameters constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion;
 
 
 

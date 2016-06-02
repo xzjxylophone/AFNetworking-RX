@@ -110,7 +110,14 @@
 }
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
 {
-    parameters = [self mergerSuffixWithDictionary:parameters];
+    return [self postActionWithBaseUrl:baseUrl url:url parameters:parameters image:image useExtraParameters:YES constructingBodyBlock:constructingBodyBlock progress:progress completion:completion];
+}
+
++ (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image useExtraParameters:(BOOL)useExtraParameters constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
+{
+    if (useExtraParameters) {
+        parameters = [self mergerSuffixWithDictionary:parameters];
+    }
     RXSimpleHttpManager *http = [[self alloc] init];
     http.httpSessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
     
