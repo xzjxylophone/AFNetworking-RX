@@ -128,9 +128,12 @@
             self.resultCode = [code integerValue];
             self.resultMsg = (NSString *)msg;
             
-            
             if (cm.customServerResultAction != nil) {
-                cm.customServerResultAction(self.resultCode);
+                NSInteger code = self.resultCode;
+                // 很重要一定要放在主线程去执行相关的操作
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cm.customServerResultAction(code);
+                });
             }
             
             
