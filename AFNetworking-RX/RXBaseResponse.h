@@ -11,7 +11,7 @@
 
 typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
     
-    kE_RX_ResponseType_Unknow               =           -1,
+    kE_RX_ResponseType_ClientParametersError               =           -1, // 客户端传入的参数有问题,例如,密码错误,账号不存在等等
     kE_RX_ResponseType_Success              =           0,
     kE_RX_ResponseType_NetworkError,
     kE_RX_ResponseType_NetworkTimeout,

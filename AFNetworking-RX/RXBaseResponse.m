@@ -40,7 +40,7 @@
     if (self.resultCode == cm.serverInvalidFormatCode) {
         return kE_RX_ResponseType_ServerInvalidFormat;
     }
-    return kE_RX_ResponseType_Unknow;
+    return kE_RX_ResponseType_ClientParametersError;
     
     
 }
