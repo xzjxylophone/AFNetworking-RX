@@ -62,18 +62,17 @@
         if (self = [self initWithDictionary:responseObject]) {
             
         }
-        return self;
     } else if ([responseObject isKindOfClass:[NSData class]]) {
         if (self = [self initWithData:responseObject]) {
             
         }
-        return self;
     } else {
         if (self = [self initWithString:responseObject]) {
             
         }
-        return self;
     }
+    self.responseObject = responseObject;
+    return self;
 }
 
 
@@ -81,7 +80,6 @@
 {
     NSData *jsonData = [str dataUsingEncoding:NSUTF8StringEncoding];
     if (self = [self initWithData:jsonData]) {
-        
     }
     return self;
 }

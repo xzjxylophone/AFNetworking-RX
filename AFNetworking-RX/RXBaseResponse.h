@@ -40,6 +40,9 @@ typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
 @property (nonatomic, strong) NSDictionary *resultDictionary;
 
 
+@property (nonatomic, strong) id responseObject;
+
+
 - (id)initWithResponseObject:(id)responseObject;
 
 + (id)networkErrorResponseWithError:(NSError *)error;
