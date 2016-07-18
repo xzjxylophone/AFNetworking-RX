@@ -19,4 +19,11 @@
 #define k_RX_SwitchLog_Debug                    0
 #endif
 
+
+// 当网络出错的时候,输出Error信息,
+#ifndef k_RX_SwitchLog_Error_Print
+#define k_RX_SwitchLog_Error_Print                    1
+#endif
+
+
 #endif /* RXAFNetworkingDefine_h */

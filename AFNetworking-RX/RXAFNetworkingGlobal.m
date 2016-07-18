@@ -35,7 +35,17 @@ void RXAFnetworkingPrintUrlAndParameters(NSString *format, ...)
 #endif
 }
 
-
+FOUNDATION_EXPORT void RXAFnetworkingPrintErrorInfo(NSString *format, ...) NS_FORMAT_FUNCTION(1,2)
+{
+#ifdef DEBUG
+#if k_RX_SwitchLog_Error_Print
+    va_list argptr;
+    va_start(argptr, format);
+    NSLogv(format, argptr);
+    va_end(argptr);
+#endif
+#endif
+}
 
 
 @implementation RXAFNetworkingGlobal

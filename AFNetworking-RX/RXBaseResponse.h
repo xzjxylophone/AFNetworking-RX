@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
 
 @interface RXBaseResponse : NSObject
 
+@property (nonatomic, copy) NSString *baseUrlString;
+@property (nonatomic, copy) NSString *requestUrlString;
+@property (nonatomic, strong) NSDictionary *parameters;
+
+
+
 
 @property (nonatomic, readonly) E_RX_ResponseType responseType;
 @property (nonatomic, assign) NSInteger resultCode;

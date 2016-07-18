@@ -12,7 +12,7 @@
 #import "RXBaseResponse.h"
 #import "RXAFNetworkingDefine.h"
 
-
+#import "RXNetworkingRecordManager.h"
 
 
 @interface RXBaseRequest ()
@@ -73,6 +73,7 @@
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
+
             [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval parameters:weakSelf.reallyParameters];
             [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.reallyParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
@@ -81,6 +82,8 @@
             } failure:^(NSURLSessionDataTask *task, NSError *error) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
             }];
+            [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:self];
+
         }
             break;
         case kE_RXRequestMethod_Post:
@@ -93,6 +96,7 @@
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
             }];
+            [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:self];
         }
             break;
     }
@@ -112,7 +116,7 @@
 
 - (void)analysisInOtherRunLoopWithResponseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group
 {
-    [RXNetworkingConfigManager analysisInOtherRunLoopWithRequest:self responseObject:responseObject error:error group:group completion:nil];
+    [RXNetworkingConfigManager analysisInOtherRunLoopWithRequestOrManager:self responseObject:responseObject error:error group:group completion:nil];
 }
 
 

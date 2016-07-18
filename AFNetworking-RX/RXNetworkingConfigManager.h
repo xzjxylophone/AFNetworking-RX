@@ -45,6 +45,9 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 // 正确的返回值, default 0
 @property (nonatomic, assign) NSInteger successResultCode;
 
+// 是否开启网络log日志,默认在Debug模式是开启,在Release是关闭的,可以控制
+@property (nonatomic, assign) BOOL isNetworkLogEnable;
+
 
 // 当网络错误
 @property (nonatomic, copy) NSString *networkErrorMsg;
@@ -78,6 +81,9 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 
 
 
+
+
+
 @property (nonatomic, readonly) NSMutableArray *requestArray;
 @property (nonatomic, readonly) NSMutableArray *batchRequestArray;
 
@@ -93,7 +99,7 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 
 + (void)cancelHttpSessionManager:(AFHTTPSessionManager *)httpSessionManager;
 
-+ (void)analysisInOtherRunLoopWithRequest:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion;
++ (void)analysisInOtherRunLoopWithRequestOrManager:(id)data responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion;
 
 
 + (RXNetworkingConfigManager *)sharedInstance;

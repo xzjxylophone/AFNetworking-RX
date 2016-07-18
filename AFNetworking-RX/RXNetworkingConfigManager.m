@@ -11,6 +11,8 @@
 #import "RXAFNetworkingGlobal.h"
 #import "RXBaseResponse.h"
 #import "RXAFNetworkingDefine.h"
+#import "RXSimpleHttpManager.h"
+#import "RXNetworkingRecordManager.h"
 
 
 // 调试信息
@@ -55,6 +57,12 @@
         self.serverInvalidFormatCode = kE_RX_NetworkExceptionType_ServerInvalidFormat;
         
         self.customServerResultAction = nil;
+        
+#if DEBUG
+        self.isNetworkLogEnable = YES;
+#else
+        self.isNetworkLogEnable = NO;
+#endif
         
         self.requestArray = [NSMutableArray array];
         self.batchRequestArray = [NSMutableArray array];
@@ -173,14 +181,17 @@
 + (void)performInOtherRunLoopWithDictionary:(NSDictionary *)dic
 {
     RXBaseRequest *request = nil;
+    RXSimpleHttpManager *http = nil;
     id responseObject = nil;
     NSError *error = nil;
     dispatch_group_t group = NULL;
     void (^completion)(RXBaseResponse *response) = nil;
     
     id idRequest = dic[@"request"];
-    if (![idRequest isKindOfClass:[NSNull class]]) {
+    if ([idRequest isKindOfClass:[RXBaseRequest class]]) {
         request = idRequest;
+    } else {
+        http = idRequest;
     }
     id idResponseObject = dic[@"responseObject"];
     if (![idResponseObject isKindOfClass:[NSNull class]]) {
@@ -203,6 +214,10 @@
 
     if (request) {
         request.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+        request.response.baseUrlString = request.baseUrlString;
+        request.response.requestUrlString = request.requestUrlString;
+        request.response.parameters = request.reallyParameters;
+        [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:request.response];
         dispatch_async(dispatch_get_main_queue(), ^{
             if (request.completion != nil) {
                 [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
@@ -216,6 +231,10 @@
         });
     } else if (completion) {
         RXBaseResponse *response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+        response.baseUrlString = [NSString stringWithFormat:@"%@", http.httpSessionManager.baseURL];
+        response.requestUrlString = http.url;
+        response.parameters = http.parameters;
+        [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:response];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
             completion(response);
@@ -228,11 +247,11 @@
     
 }
 
-+ (void)analysisInOtherRunLoopWithRequest:(RXBaseRequest *)request responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion
++ (void)analysisInOtherRunLoopWithRequestOrManager:(id)data responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion
 {
     
     NSThread *thread = [self networkResponseAnalysisThread];
-    NSDictionary *dic = @{@"request":request ? request : [NSNull null],
+    NSDictionary *dic = @{@"request":data,
                           @"responseObject":responseObject ? responseObject : [NSNull null],
                           @"error":error ? error : [NSNull null],
                           @"group":group ? group : [NSNull null]};

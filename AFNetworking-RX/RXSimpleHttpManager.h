@@ -14,6 +14,9 @@
 
 @property (nonatomic, readonly) AFHTTPSessionManager *httpSessionManager;
 
+@property (nonatomic, copy) NSString *url;
+@property (nonatomic, strong) NSDictionary *parameters;
+
 
 
 + (id)exhibitionListWithOffset:(NSInteger)offset num:(NSInteger)num completion:(void (^)(RXBaseResponse *response))completion;

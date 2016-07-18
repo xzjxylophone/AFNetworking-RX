@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "AFNetworking+RXHeader.h"
+
 #import "RTExhibitionListRequest.h"
 #import "RTBaseCityRequest.h"
 
@@ -15,8 +16,8 @@
 
 #import "RXBatchRequestObject.h"
 
-#import "RTSimpleHttpManager.h"
 #import "RTUploadPicRequest.h"
+#import "RTSimpleHttpManager.h"
 
 
 
@@ -93,6 +94,10 @@
 {
     RTSimpleHttpManager *http = [RTSimpleHttpManager postExhibitionListWithOffset:0 num:1 completion:^(RXBaseResponse *response) {
         NSLog(@"kkk");
+        
+        
+        RXNetworkingRecordManager *manager = [RXNetworkingRecordManager sharedInstance];
+        NSLog(@"recordArray:%@", manager.recordArray);
     }];
     NSLog(@"http:%@", NSStringFromClass([http class]));
 }
@@ -173,7 +178,6 @@
     
     
     [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
-    
     
     
 //    [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];

@@ -15,6 +15,7 @@
 		C90D14BA1CFC2B5200461480 /* RXBaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B91CFC2B5200461480 /* RXBaseResponse.m */; };
 		C96B0E651CEEB5CE00B01976 /* RTSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */; };
 		C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */; };
+		C9E6506F1D38E6D900EA3B4A /* RXNetworkingRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C9E6506E1D38E6D900EA3B4A /* RXNetworkingRecordManager.m */; };
 		C9F53DF11CE1C7F100BF6E1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF01CE1C7F100BF6E1F /* main.m */; };
 		C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F53DF31CE1C7F100BF6E1F /* AppDelegate.m */; };
 		C9F53DFC1CE1C7F100BF6E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9F53DFB1CE1C7F100BF6E1F /* Assets.xcassets */; };
@@ -45,6 +46,8 @@
 		C96B0E641CEEB5CE00B01976 /* RTSimpleHttpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTSimpleHttpManager.m; sourceTree = "<group>"; };
 		C96B0E661CEEFB9B00B01976 /* RTUploadPicRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTUploadPicRequest.h; sourceTree = "<group>"; };
 		C96B0E671CEEFB9B00B01976 /* RTUploadPicRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTUploadPicRequest.m; sourceTree = "<group>"; };
+		C9E6506D1D38E6D900EA3B4A /* RXNetworkingRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingRecordManager.h; sourceTree = "<group>"; };
+		C9E6506E1D38E6D900EA3B4A /* RXNetworkingRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingRecordManager.m; sourceTree = "<group>"; };
 		C9F53DEC1CE1C7F100BF6E1F /* AFNetworking-RXExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AFNetworking-RXExample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9F53DF01CE1C7F100BF6E1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C9F53DF21CE1C7F100BF6E1F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -102,6 +105,8 @@
 				C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */,
 				C90D14AC1CFC2B2C00461480 /* RXSimpleHttpManager.h */,
 				C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */,
+				C9E6506D1D38E6D900EA3B4A /* RXNetworkingRecordManager.h */,
+				C9E6506E1D38E6D900EA3B4A /* RXNetworkingRecordManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 				C9F53E271CE1E78B00BF6E1F /* RTBaseCityRequest.m in Sources */,
 				C9F53E2A1CE1E9BF00BF6E1F /* RTLoginRequest.m in Sources */,
 				C90D14B61CFC2B4000461480 /* RXBatchRequestObject.m in Sources */,
+				C9E6506F1D38E6D900EA3B4A /* RXNetworkingRecordManager.m in Sources */,
 				C9F53DF41CE1C7F100BF6E1F /* AppDelegate.m in Sources */,
 				C96B0E681CEEFB9B00B01976 /* RTUploadPicRequest.m in Sources */,
 				C9F53E091CE1C92400BF6E1F /* MainViewController.m in Sources */,

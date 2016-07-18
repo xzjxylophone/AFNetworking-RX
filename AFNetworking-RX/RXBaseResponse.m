@@ -173,6 +173,7 @@
 {
     RXBaseResponse *response = nil;
     if (error != nil) {
+        RXAFnetworkingPrintErrorInfo(@"%@", error);
         response = [RXBaseResponse networkErrorResponseWithError:error];
     } else {
         response = [[RXBaseResponse alloc] initWithResponseObject:responseObject];

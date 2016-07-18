@@ -11,6 +11,7 @@ FOUNDATION_EXPORT void RXAFnetworkingDebugLog(NSString *format, ...) NS_FORMAT_F
 
 
 FOUNDATION_EXPORT void RXAFnetworkingPrintUrlAndParameters(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
+FOUNDATION_EXPORT void RXAFnetworkingPrintErrorInfo(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 
 

@@ -12,6 +12,7 @@
 #import "RXBaseResponse.h"
 #import "RXNetworkingConfigManager.h"
 
+#import "RXNetworkingRecordManager.h"
 
 @interface RXSimpleHttpManager ()
 
@@ -84,11 +85,11 @@
     [http.httpSessionManager GET:url parameters:parameters progress:^(NSProgress *downloadProgress) {
         // Do Noting
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:nil error:error completion:completion];
     }];
-    [self printBaseUrl:baseUrl url:url parameters:parameters];
+    [self printManager:http baseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters completion:(void (^)(RXBaseResponse *response))completion
@@ -101,11 +102,11 @@
     [http.httpSessionManager POST:url parameters:parameters progress:^(NSProgress *uploadProgress) {
         // Do Noting
     } success:^(NSURLSessionDataTask *task, id responseObject) {
-        [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:nil error:error completion:completion];
     }];
-    [self printBaseUrl:baseUrl url:url parameters:parameters];
+    [self printManager:http baseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 + (id)postActionWithBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters image:(UIImage *)image constructingBodyBlock:(void (^)(id<AFMultipartFormData> formData))constructingBodyBlock progress:(void (^)(NSProgress *progress))progress completion:(void (^)(RXBaseResponse *response))completion
@@ -126,11 +127,11 @@
     http.httpSessionManager.responseSerializer = responseSerializer;
     
     [http.httpSessionManager POST:url parameters:parameters constructingBodyWithBlock:constructingBodyBlock progress:progress success:^(NSURLSessionDataTask *task, id responseObject) {
-        [RXSimpleHttpManager resultWithResponseObject:responseObject error:nil completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:responseObject error:nil completion:completion];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [RXSimpleHttpManager resultWithResponseObject:nil error:error completion:completion];
+        [RXSimpleHttpManager resultWithManager:http responseObject:nil error:error completion:completion];
     }];
-    [self printBaseUrl:baseUrl url:url parameters:parameters];
+    [self printManager:http baseUrl:baseUrl url:url parameters:parameters];
     return http;
 }
 
@@ -152,11 +153,16 @@
     return resultParameters;
 }
 
-+ (void)printBaseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters
++ (void)printManager:(RXSimpleHttpManager *)manager baseUrl:(NSString *)baseUrl url:(NSString *)url parameters:(NSDictionary *)parameters
 {
+    manager.url = url;
+    manager.parameters = parameters;
+    
     NSString *tmp = [NSString stringWithFormat:@"%@/%@", baseUrl, url];
     NSString *str = [RXAFNetworkingGlobal parametersFromDictionary:parameters];
     RXAFnetworkingPrintUrlAndParameters(@"url:%@ paramters:%@", tmp, str);
+    [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:manager];
+
 }
 
 #pragma mark - Public
@@ -170,10 +176,10 @@
 
 #pragma mark - class private
 
-+ (void)resultWithResponseObject:(id)responseObject error:(NSError *)error completion:(void (^)(RXBaseResponse *response))completion
++ (void)resultWithManager:(RXSimpleHttpManager *)http responseObject:(id)responseObject error:(NSError *)error completion:(void (^)(RXBaseResponse *response))completion
 {
     if (completion) {
-        [RXNetworkingConfigManager analysisInOtherRunLoopWithRequest:nil responseObject:responseObject error:error group:nil completion:completion];
+        [RXNetworkingConfigManager analysisInOtherRunLoopWithRequestOrManager:http responseObject:responseObject error:error group:nil completion:completion];
     }
 
 }
