@@ -177,7 +177,8 @@
 //    [self performSelector:@selector(testUpload02) withObject:nil afterDelay:1];
     
     
-    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
+    [self testSimple02];
+//    [self performSelector:@selector(testSimple02) withObject:nil afterDelay:1];
     
     
 //    [self performSelector:@selector(testBatchRequest01) withObject:nil afterDelay:1];

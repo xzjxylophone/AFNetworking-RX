@@ -263,8 +263,12 @@
 
     }
     [self printMainAndCurrentRunLoopInfoWithDes:@"safeBlock_completion"];
+    
+#warning lkskgslkdlkgklkl
+    [self performInOtherRunLoopWithDictionary:mutDic];
+    
     // 放到其他的RunLoop中去
-    [self performSelector:@selector(performInOtherRunLoopWithDictionary:) onThread:thread withObject:mutDic waitUntilDone:YES modes:@[NSDefaultRunLoopMode]];
+//    [self performSelector:@selector(performInOtherRunLoopWithDictionary:) onThread:thread withObject:mutDic waitUntilDone:YES modes:@[NSDefaultRunLoopMode]];
 }
 
 + (void)printMainAndCurrentRunLoopInfoWithDes:(NSString *)des
