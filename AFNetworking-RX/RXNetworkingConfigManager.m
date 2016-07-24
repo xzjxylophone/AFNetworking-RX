@@ -180,71 +180,70 @@
 #pragma mark - Private
 + (void)performInOtherRunLoopWithDictionary:(NSDictionary *)dic
 {
-    RXBaseRequest *request = nil;
-    RXSimpleHttpManager *http = nil;
-    id responseObject = nil;
-    NSError *error = nil;
-    dispatch_group_t group = NULL;
-    void (^completion)(RXBaseResponse *response) = nil;
-    
-    id idRequest = dic[@"request"];
-    if ([idRequest isKindOfClass:[RXBaseRequest class]]) {
-        request = idRequest;
-    } else {
-        http = idRequest;
-    }
-    id idResponseObject = dic[@"responseObject"];
-    if (![idResponseObject isKindOfClass:[NSNull class]]) {
-        responseObject = idResponseObject;
-    }
-    id idError = dic[@"error"];
-    if (![idError isKindOfClass:[NSNull class]]) {
-        error = idError;
-    }
-    id idGroup = dic[@"group"];
-    if (![idGroup isKindOfClass:[NSNull class]]) {
-        group = idGroup;
-    }
-    
-    id idCompletion = dic[@"completion"];
-    if (![idCompletion isKindOfClass:[NSNull class]]) {
-        completion = (void (^)(RXBaseResponse *response))idCompletion;
-    }
-    [self printMainAndCurrentRunLoopInfoWithDes:@"performInOtherRunLoopWithDictionary"];
-
-    if (request) {
-        request.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
-        request.response.baseUrlString = request.baseUrlString;
-        request.response.requestUrlString = request.requestUrlString;
-        request.response.parameters = request.reallyParameters;
-        [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:request.response];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (request.completion != nil) {
+    @autoreleasepool {
+        RXBaseRequest *request = nil;
+        RXSimpleHttpManager *http = nil;
+        id responseObject = nil;
+        NSError *error = nil;
+        dispatch_group_t group = NULL;
+        void (^completion)(RXBaseResponse *response) = nil;
+        
+        id idRequest = dic[@"request"];
+        if ([idRequest isKindOfClass:[RXBaseRequest class]]) {
+            request = idRequest;
+        } else {
+            http = idRequest;
+        }
+        id idResponseObject = dic[@"responseObject"];
+        if (![idResponseObject isKindOfClass:[NSNull class]]) {
+            responseObject = idResponseObject;
+        }
+        id idError = dic[@"error"];
+        if (![idError isKindOfClass:[NSNull class]]) {
+            error = idError;
+        }
+        id idGroup = dic[@"group"];
+        if (![idGroup isKindOfClass:[NSNull class]]) {
+            group = idGroup;
+        }
+        
+        id idCompletion = dic[@"completion"];
+        if (![idCompletion isKindOfClass:[NSNull class]]) {
+            completion = (void (^)(RXBaseResponse *response))idCompletion;
+        }
+        [self printMainAndCurrentRunLoopInfoWithDes:@"performInOtherRunLoopWithDictionary"];
+        
+        if (request) {
+            request.response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+            request.response.baseUrlString = request.baseUrlString;
+            request.response.requestUrlString = request.requestUrlString;
+            request.response.parameters = request.reallyParameters;
+            [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:request.response];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (request.completion != nil) {
+                    [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
+                    request.completion(request);
+                    request.completion = nil;
+                }
+                if (group) {
+                    dispatch_group_leave(group);
+                }
+                [[RXNetworkingConfigManager sharedInstance] removeRequest:request];
+            });
+        } else if (completion) {
+            RXBaseResponse *response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
+            response.baseUrlString = [NSString stringWithFormat:@"%@", http.httpSessionManager.baseURL];
+            response.requestUrlString = http.url;
+            response.parameters = http.parameters;
+            [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:response];
+            dispatch_async(dispatch_get_main_queue(), ^{
                 [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
-                request.completion(request);
-                request.completion = nil;
-            }
-            if (group) {
-                dispatch_group_leave(group);
-            }
-            [[RXNetworkingConfigManager sharedInstance] removeRequest:request];
-        });
-    } else if (completion) {
-        RXBaseResponse *response = [RXBaseResponse responseWithResponseObject:responseObject error:error];
-        response.baseUrlString = [NSString stringWithFormat:@"%@", http.httpSessionManager.baseURL];
-        response.requestUrlString = http.url;
-        response.parameters = http.parameters;
-        [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:response];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self printMainAndCurrentRunLoopInfoWithDes:@"dispatch_async"];
-            completion(response);
-        });
-    } else {
-        // Do Nothing
+                completion(response);
+            });
+        } else {
+            // Do Nothing
+        }
     }
-    
-    
-    
 }
 
 + (void)analysisInOtherRunLoopWithRequestOrManager:(id)data responseObject:(id)responseObject error:(NSError *)error group:(dispatch_group_t)group completion:(void (^)(RXBaseResponse *response))completion
@@ -265,10 +264,12 @@
     [self printMainAndCurrentRunLoopInfoWithDes:@"safeBlock_completion"];
     
 #warning lkskgslkdlkgklkl
-    [self performInOtherRunLoopWithDictionary:mutDic];
+    // 方法1:
+//    [self performInOtherRunLoopWithDictionary:mutDic];
     
     // 放到其他的RunLoop中去
-//    [self performSelector:@selector(performInOtherRunLoopWithDictionary:) onThread:thread withObject:mutDic waitUntilDone:YES modes:@[NSDefaultRunLoopMode]];
+    // 方法2:
+    [self performSelector:@selector(performInOtherRunLoopWithDictionary:) onThread:thread withObject:mutDic waitUntilDone:YES modes:@[NSDefaultRunLoopMode]];
 }
 
 + (void)printMainAndCurrentRunLoopInfoWithDes:(NSString *)des
