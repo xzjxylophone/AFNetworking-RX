@@ -116,30 +116,36 @@
         NSString *codeKey = cm.resultCodeKey;
         NSString *msgKey = cm.resultMsgKey;
         self.resultDictionary = dic;
-        id code = dic[codeKey];
-        id msg = dic[msgKey];
         
-        if (code == nil) {
-            self.resultCode = cm.serverInvalidFormatCode;
-            self.resultMsg = cm.serverInvalidFormatMsg;
+        if (cm.customAnalysisCodeAndMsg) {
+            NSInteger resultCode = 0;
+            NSString *resultMsg = @"";
+            cm.customAnalysisCodeAndMsg(&resultCode, &resultMsg, dic);
+            self.resultCode = resultCode;
+            self.resultMsg = resultMsg;
         } else {
-            self.resultCode = [code integerValue];
-            self.resultMsg = (NSString *)msg;
+            id code = dic[codeKey];
+            id msg = dic[msgKey];
             
-            if (cm.customServerResultAction != nil) {
-                NSInteger code = self.resultCode;
-                // 很重要一定要放在主线程去执行相关的操作
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cm.customServerResultAction(code);
-                });
+            if (code == nil) {
+                self.resultCode = cm.serverInvalidFormatCode;
+                self.resultMsg = cm.serverInvalidFormatMsg;
+            } else {
+                self.resultCode = [code integerValue];
+                self.resultMsg = (NSString *)msg;
+                
+                if (cm.customServerResultAction != nil) {
+                    NSInteger code = self.resultCode;
+                    // 很重要一定要放在主线程去执行相关的操作
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cm.customServerResultAction(code);
+                    });
+                }
+                
             }
-            
-            
-            
-            
-            
-            
         }
+        
+        
     }
     return self;
 }

@@ -79,6 +79,10 @@ typedef NS_ENUM(NSInteger, E_RX_NetworkExceptionType) {
 @property (nonatomic, copy) void (^customConfigGetHttpSessionManager)(AFHTTPSessionManager *httpSessionManager, NSTimeInterval timeoutIntervale, NSDictionary *parameters);
 
 
+// 自定义配置的解析返回通用公共集合
+@property (nonatomic, copy) void (^customAnalysisCodeAndMsg)(NSInteger *code, NSString **msg, NSDictionary *dic);
+
+
 
 
 
