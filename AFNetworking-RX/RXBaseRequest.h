@@ -28,6 +28,7 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 @interface RXBaseRequest : NSObject
 
 #pragma mark - Block
+// 当网络返回成功或者失败后，此completion会被自动置为nil
 @property (nonatomic, copy) RXRequestCompletionBlock completion;
 
 #pragma mark - Property
@@ -67,9 +68,9 @@ typedef void(^RXRequestCompletionBlock)(RXBaseRequest *request);
 
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion;
 - (void)start;
-
-
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion group:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
+- (void)startWithGroup:(dispatch_group_t)group queue:(dispatch_queue_t)queue;
+
 
 - (void)cancel;
 

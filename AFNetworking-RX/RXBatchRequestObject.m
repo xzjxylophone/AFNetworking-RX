@@ -43,7 +43,7 @@
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t queue = dispatch_queue_create("com.001", DISPATCH_QUEUE_CONCURRENT);
     for (RXBaseRequest *request in self.requestArray) {
-        [request startWithCompletion:nil group:group queue:queue];
+        [request startWithGroup:group queue:queue];
     }
     __weak __typeof(self) weakSelf = self;
     dispatch_group_notify(group, queue, ^{

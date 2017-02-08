@@ -33,12 +33,13 @@
 #pragma mark - Public
 - (void)startWithCompletion:(RXRequestCompletionBlock)completion
 {
-    [self startWithCompletion:completion group:NULL queue:NULL];
+    self.completion = completion;
+    [self startWithGroup:NULL queue:NULL];
 }
 
 - (void)start
 {
-    [self startWithCompletion:nil group:NULL queue:NULL];
+    [self startWithGroup:NULL queue:NULL];
 }
 
 
@@ -48,13 +49,15 @@
     [[RXNetworkingConfigManager sharedInstance] addRequest:self];
     
     self.completion = completion;
+    
+    [self startWithGroup:group queue:queue];
+    
+}
+
+- (void)startWithGroup:(dispatch_group_t)group queue:(dispatch_queue_t)queue
+{
     // 这里如何使用__strong 而不使用一个RequestArray 会无法释放
     __weak __typeof(self) weakSelf = self;
-    
-    
-    
-    
-    
     if (group) {
         dispatch_group_enter(group);
         self.httpSessionManager.completionGroup = group;
@@ -63,8 +66,8 @@
         self.httpSessionManager.completionQueue = queue;
     }
     
-
-
+    
+    
     NSString *str = [RXAFNetworkingGlobal parametersFromDictionary:self.reallyParameters];
     RXAFnetworkingPrintUrlAndParameters(@"url:%@/%@ parameters:%@", self.baseUrlString, self.requestUrlString, str);
     
@@ -73,7 +76,7 @@
     switch (self.e_RXRequestMethod) {
         case kE_RXRequestMethod_Get:
         {
-
+            
             [[RXNetworkingConfigManager sharedInstance] configGetHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval parameters:weakSelf.reallyParameters];
             [self.httpSessionManager GET:self.requestUrlString parameters:weakSelf.reallyParameters progress:^(NSProgress * _Nonnull downloadProgress) {
                 // Do Noting
@@ -83,14 +86,14 @@
                 [weakSelf analysisInOtherRunLoopWithResponseObject:nil error:error group:group];
             }];
             [[RXNetworkingRecordManager sharedInstance] addRecordWithRXData:self];
-
+            
         }
             break;
         case kE_RXRequestMethod_Post:
         default:
         {
             [[RXNetworkingConfigManager sharedInstance] configPostHttpSessionManager:self.httpSessionManager timeoutInterval:self.timeoutInterval];
-
+            
             [self.httpSessionManager POST:self.requestUrlString parameters:self.reallyParameters constructingBodyWithBlock:self.constructingBodyBlock progress:self.uploadProgress success:^(NSURLSessionDataTask *task, id responseObject) {
                 [weakSelf analysisInOtherRunLoopWithResponseObject:responseObject error:nil group:group];
             } failure:^(NSURLSessionDataTask *task, NSError * error) {
@@ -100,8 +103,6 @@
         }
             break;
     }
-    
-    
 }
 
 
