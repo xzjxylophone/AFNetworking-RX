@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE05E044DC55EC27A13A7AF8 /* libPods.a */; };
+		03A52372BB62DA957DCA9868 /* libPods-AFNetworking-RXExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */; };
 		C90D14AE1CFC2B2C00461480 /* RXNetworkingConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */; };
 		C90D14AF1CFC2B2C00461480 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */; };
 		C90D14B51CFC2B4000461480 /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B21CFC2B4000461480 /* RXBaseRequest.m */; };
@@ -29,8 +29,10 @@
 
 /* Begin PBXFileReference section */
 		37563F2A3724139D03098355 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		48B4A9E09A9E093957E00B9B /* Pods-AFNetworking-RXExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking-RXExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample.debug.xcconfig"; sourceTree = "<group>"; };
 		499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BE05E044DC55EC27A13A7AF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A94BBDFD104E50BAB63ADCC /* Pods-AFNetworking-RXExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking-RXExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample.release.xcconfig"; sourceTree = "<group>"; };
+		A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AFNetworking-RXExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90D14AA1CFC2B2C00461480 /* RXNetworkingConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingConfigManager.h; sourceTree = "<group>"; };
 		C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingConfigManager.m; sourceTree = "<group>"; };
 		C90D14AC1CFC2B2C00461480 /* RXSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSimpleHttpManager.h; sourceTree = "<group>"; };
@@ -74,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E5A84C0DFBBDAA5A5EE6CCC /* libPods.a in Frameworks */,
+				03A52372BB62DA957DCA9868 /* libPods-AFNetworking-RXExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +88,8 @@
 			children = (
 				499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */,
 				37563F2A3724139D03098355 /* Pods.release.xcconfig */,
+				48B4A9E09A9E093957E00B9B /* Pods-AFNetworking-RXExample.debug.xcconfig */,
+				6A94BBDFD104E50BAB63ADCC /* Pods-AFNetworking-RXExample.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -93,7 +97,7 @@
 		94E46E9BFEC24390610C5EA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE05E044DC55EC27A13A7AF8 /* libPods.a */,
+				A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -222,12 +226,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C9F53E031CE1C7F100BF6E1F /* Build configuration list for PBXNativeTarget "AFNetworking-RXExample" */;
 			buildPhases = (
-				003392F8C622D51F1555BFC1 /* Check Pods Manifest.lock */,
+				003392F8C622D51F1555BFC1 /* [CP] Check Pods Manifest.lock */,
 				C9F53DE81CE1C7F100BF6E1F /* Sources */,
 				C9F53DE91CE1C7F100BF6E1F /* Frameworks */,
 				C9F53DEA1CE1C7F100BF6E1F /* Resources */,
-				C36430B60D12A569E7119BE3 /* Embed Pods Frameworks */,
-				097074C28ADE381252D12ABC /* Copy Pods Resources */,
+				C36430B60D12A569E7119BE3 /* [CP] Embed Pods Frameworks */,
+				097074C28ADE381252D12ABC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -284,49 +288,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		003392F8C622D51F1555BFC1 /* Check Pods Manifest.lock */ = {
+		003392F8C622D51F1555BFC1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AFNetworking-RXExample-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		097074C28ADE381252D12ABC /* Copy Pods Resources */ = {
+		097074C28ADE381252D12ABC /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C36430B60D12A569E7119BE3 /* Embed Pods Frameworks */ = {
+		C36430B60D12A569E7119BE3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -447,8 +454,9 @@
 		};
 		C9F53E041CE1C7F100BF6E1F /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 48B4A9E09A9E093957E00B9B /* Pods-AFNetworking-RXExample.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
@@ -465,8 +473,9 @@
 		};
 		C9F53E051CE1C7F100BF6E1F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 37563F2A3724139D03098355 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 6A94BBDFD104E50BAB63ADCC /* Pods-AFNetworking-RXExample.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
