@@ -10,7 +10,7 @@
 
 Pod::Spec.new do |s|
   s.name     = "AFNetworking+RX"
-  s.version  = "3.1.0.19"
+  s.version  = "3.1.0.20"
   s.license  = "MIT"
   s.summary  = "AFNetworking+RX is a simple ext of AFNetworking"
   s.homepage = "https://github.com/xzjxylophone/AFNetworking-RX"
