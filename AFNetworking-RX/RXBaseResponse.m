@@ -174,6 +174,12 @@
     return response;
 }
 
+- (NSError *)customError
+{
+    NSDictionary *userInfo = @{NSLocalizedDescriptionKey: self.resultMsg};
+    NSError *error = [NSError errorWithDomain:@"www.rush.d.xzj.customdomain" code:self.resultCode userInfo:userInfo];
+    return error;
+}
 
 + (id)responseWithResponseObject:(id)responseObject error:(NSError *)error
 {

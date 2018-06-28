@@ -12,6 +12,8 @@
 #import "MainViewController.h"
 #import "AFNetworking+RXHeader.h"
 
+//http://blog.csdn.net/a158337/article/details/52167008
+
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UINavigationController *mainNC;

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03A52372BB62DA957DCA9868 /* libPods-AFNetworking-RXExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */; };
+		0E63B0C916B90A475F24683C /* Pods_AFNetworking_RXExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A90A90E3BC6F6A2E4909C7 /* Pods_AFNetworking_RXExample.framework */; };
 		C90D14AE1CFC2B2C00461480 /* RXNetworkingConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */; };
 		C90D14AF1CFC2B2C00461480 /* RXSimpleHttpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14AD1CFC2B2C00461480 /* RXSimpleHttpManager.m */; };
 		C90D14B51CFC2B4000461480 /* RXBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C90D14B21CFC2B4000461480 /* RXBaseRequest.m */; };
@@ -32,7 +32,7 @@
 		48B4A9E09A9E093957E00B9B /* Pods-AFNetworking-RXExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking-RXExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample.debug.xcconfig"; sourceTree = "<group>"; };
 		499CA1ACBB690E02C842ECA6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6A94BBDFD104E50BAB63ADCC /* Pods-AFNetworking-RXExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AFNetworking-RXExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample.release.xcconfig"; sourceTree = "<group>"; };
-		A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AFNetworking-RXExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4A90A90E3BC6F6A2E4909C7 /* Pods_AFNetworking_RXExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AFNetworking_RXExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C90D14AA1CFC2B2C00461480 /* RXNetworkingConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXNetworkingConfigManager.h; sourceTree = "<group>"; };
 		C90D14AB1CFC2B2C00461480 /* RXNetworkingConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXNetworkingConfigManager.m; sourceTree = "<group>"; };
 		C90D14AC1CFC2B2C00461480 /* RXSimpleHttpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXSimpleHttpManager.h; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03A52372BB62DA957DCA9868 /* libPods-AFNetworking-RXExample.a in Frameworks */,
+				0E63B0C916B90A475F24683C /* Pods_AFNetworking_RXExample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,7 +97,7 @@
 		94E46E9BFEC24390610C5EA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A0FEFAC7532ED788020C8FBD /* libPods-AFNetworking-RXExample.a */,
+				C4A90A90E3BC6F6A2E4909C7 /* Pods_AFNetworking_RXExample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -327,9 +327,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-AFNetworking-RXExample/Pods-AFNetworking-RXExample-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/RXCategory/RXCategory.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RXCategory.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

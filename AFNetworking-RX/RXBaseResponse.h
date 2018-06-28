@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, E_RX_ResponseType) {
 @property (nonatomic, copy) NSString *resultMsg;
 
 
+@property (nonatomic, readonly) NSError *customError;
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, strong) NSDictionary *resultDictionary;
 

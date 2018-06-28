@@ -1,11 +1,10 @@
 
-
+use_frameworks!
 target 'AFNetworking-RXExample' do
 
 pod 'AFNetworking'
 
 pod 'RXCategory'
-
 end
 
 
